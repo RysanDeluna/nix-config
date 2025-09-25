@@ -162,8 +162,8 @@
 	"$mod" = "SUPER";
 
 	exec-once = [
-	  "waybar"
-	  "mako"
+	  "waybar 2>&1 > ~/logwaybar"
+	  "mako 2>&1 > ~/logmako"
 	  "$terminal"
 	];
 
