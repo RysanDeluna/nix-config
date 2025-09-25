@@ -162,9 +162,8 @@
 	"$mod" = "SUPER";
 
 	exec-once = [
-	  "uwsm app -- hypridle"
-	  "uwsm app -- mako"
-	  "uwsm app -- waybar"
+	  "waybar"
+	  "mako"
 	  "$terminal"
 	];
 
@@ -267,7 +266,6 @@
 
 
   services = {
-    hypridle.enable = true;
     mako.enable = true;
   };
   

@@ -60,7 +60,7 @@
   };
   
   programs.hyprland.enable = true;
-  programs.hyprland.withUWSM = true;
+
   # Configure console keymap
   console.keyMap = "br-abnt2";
 
