@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, inputs, ... }:
+{ config, pkgs, inputs, lib, ... }:
 
 {
   imports =
@@ -96,6 +96,7 @@
 	firefox
 	nautilus
 	kitty
+	neofetch
     ];
   };
 
@@ -108,11 +109,20 @@
    	vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
         xclip
    	wget
-	git
         gnumake
         unzip
-
   ];
+
+  # https://wiki.nixos.org/wiki/Fonts
+  fonts.packages = builtins.filter lib.attrsets.isDerivation (builtins.attrValues pkgs.nerd-fonts);
+  fonts.fontconfig = {
+    defaultFonts = {
+      serif = [ "NotoSerif Nerd Font" ];
+      sansSerif = [ "NotoSans Nerd Font" ];
+      monospace = [ "FiraMono Nerd Font" ];
+      emoji = [ "Noto Color Emoji" ]; 
+    };
+  };
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
