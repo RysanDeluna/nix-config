@@ -293,6 +293,45 @@
     
     waybar = {
       enable = true;
+      settings = {
+        crazy-main-bar = {
+          layer = "top";
+	  position = "top"; 
+	  height = 30;
+	  output = [ "Virtual-1" ];
+	  reload_style_on_change = true;
+
+	  modules-left = [ "tray" ];
+	  modules-center = [ "hyprland/workspaces" ];
+	  modules-right = [ "pulseaudio" "network" "clock" "power"];
+
+	  "hyprland/workspaces" = {
+            format = "{icon}";
+	    format-icons = {
+              active = "";
+	      default = "";
+	      empty = "";
+	    };
+	    persistent-workspaces = { "*" = [ 1, 2, 3, 4, 5 ]; };
+	  };
+	  clock = {
+	    format = "{:%H:%M }";
+	    interval = 60;
+	    tooltip-format = "<tt>{calendar}</tt>";
+	    timezone = "America/Sao_Paulo";
+
+            calendar = {
+	      format = {
+                today = "<span color='#fAfBfC'><b>{}</b></span>";
+	      };
+	    };
+	    actions = {
+              on-click-right = "shift_down";
+	      on-click = "shift_up";
+	    };
+	  };
+	};
+      };
     };
     wofi = {
       enable = true;
