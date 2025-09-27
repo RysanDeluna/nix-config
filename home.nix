@@ -164,6 +164,7 @@
 	exec-once = [
 	  "waybar 2>&1 > ~/logwaybar"
 	  "mako 2>&1 > ~/logmako"
+	  "waypaper --restore"
 	  "$terminal"
 	];
 
@@ -177,6 +178,7 @@
 	  "MOZ_ENABLE_WAYLAND,1"
 	  "ELECTRON_OZONE_PLATFORM_HINT,wayland"
 	  "OZONE_PLATFORM,wayland"
+	  "GSK_RENDERER,vulkan"
 	  "XDG_SESSION_TYPE,wayland"
 
 	  "XDG_CURRENT_DESKTOP,Hyprland"
@@ -267,6 +269,10 @@
 
   services = {
     mako.enable = true;
+    swww = { 
+      enable=true; 
+      package=null; 
+    };
   };
   
   programs = {
