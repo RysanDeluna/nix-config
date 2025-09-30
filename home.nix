@@ -162,13 +162,13 @@
 	"$mod" = "SUPER";
 
 	exec-once = [
+	  "waypaper --restore"
 	  "waybar 2>&1 > ~/logwaybar"
 	  "mako 2>&1 > ~/logmako"
-	  "waypaper --restore"
 	  "$terminal"
 	];
 
-	monitor = "Virtual-1,1240x720@59,0x0,1";
+	monitor = "Virtual-1,1440x900@59,0x0,1";
 	env = [
           "XCURSOR_SIZE,24"
 	  "HYPRCURSOR_SIZE,24"
@@ -271,7 +271,6 @@
     mako.enable = true;
     swww = { 
       enable=true; 
-      package=null; 
     };
   };
   
@@ -337,6 +336,9 @@
 	    };
 	  };
 	};
+      };
+      style = {
+
       };
     };
     wofi = {
