@@ -348,10 +348,6 @@
       enable = true;
     };
 
-    kitty = {
-      enable = true;
-    };
-
     neovim = {
       enable = true; 
     };

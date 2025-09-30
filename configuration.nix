@@ -97,6 +97,7 @@
 	neofetch
 	waypaper
 	swww
+	themix-gui
     ];
   };
 
