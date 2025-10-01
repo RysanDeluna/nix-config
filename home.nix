@@ -21,7 +21,12 @@
     # # Adds the 'hello' command to your environment. It prints a friendly
     # # "Hello, world!" when run.
     pkgs.hello
-
+    pkgs.nordic
+    pkgs.rose-pine-cursor
+    pkgs.waypaper
+    pkgs.swww
+    pkgs.dconf-editor
+    pkgs.nwg-look
     # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the
     # # parentheses. Maybe you want to install Nerd Fonts with a limited number of
@@ -67,6 +72,22 @@
   #
   #  /etc/profiles/per-user/ni/etc/profile.d/hm-session-vars.sh
   #
+  gtk = {
+    enable = true;
+    theme = {
+      name = "Nordic";
+      package = null;
+    };
+  };
+
+  home.pointerCursor = {
+    name = "Nordic-cursors";
+    package = pkgs.nordic;
+    size = 24;                    
+    gtk.enable = true;           
+    x11.enable = true;          
+  };
+
   home.sessionVariables = {
     EDITOR = "nvim";
   };
@@ -157,21 +178,19 @@
 
 
 	"$terminal" = "foot";
-	"$fileManager" = "nautilus";
+	"$fileManager" = "nautilus --new-window";
 	"$menu" = "wofi --show drun";
 	"$mod" = "SUPER";
 
 	exec-once = [
 	  "waypaper --restore"
-	  "waybar 2>&1 > ~/logwaybar"
-	  "mako 2>&1 > ~/logmako"
+	  "waybar"
+	  "mako"
 	  "$terminal"
 	];
 
 	monitor = "Virtual-1,1440x900@59,0x0,1";
 	env = [
-          "XCURSOR_SIZE,24"
-	  "HYPRCURSOR_SIZE,24"
 	  "GDK_BACKEND,wayland,x11,*"
 	  "QT_STYLE_OVERRIDE,kvantum"
 	  "SDL_VIDEODRIVER,wayland"
@@ -200,6 +219,7 @@
 	};
 
 	cursor = { 
+	  enable_hyprcursor = false;
           inactive_timeout = 10;
 	  no_warps = true;
 	};
@@ -336,9 +356,6 @@
 	    };
 	  };
 	};
-      };
-      style = {
-
       };
     };
     wofi = {

@@ -95,9 +95,6 @@
     #  thunderbird
 	firefox
 	neofetch
-	waypaper
-	swww
-	themix-gui
     ];
   };
 

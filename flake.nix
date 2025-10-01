@@ -8,7 +8,7 @@
 		home-manager.inputs.nixpkgs.follows = "nixpkgs";
 	};
 
-	outputs =  { self, home-manager, nixpkgs }:
+	outputs =  { self, home-manager, nixpkgs, ... }:
 		let
 			system = "x86_64-linux";
 			lib = nixpkgs.lib;
@@ -23,7 +23,9 @@
 		homeConfigurations = {
 			ni = home-manager.lib.homeManagerConfiguration {
 				inherit pkgs;
-				modules = [ ./home.nix ];
+				modules = [ 
+				  ./home.nix
+				];
 			};
 		};
 	};
