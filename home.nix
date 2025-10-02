@@ -115,7 +115,7 @@
           rounding = 0; 
 
 	  active_opacity = 1.0;
-	  inactive_opacity = 0.95; 
+	  inactive_opacity = 0.98; 
 
 	  shadow = {
             enabled = true;
@@ -321,38 +321,77 @@
       settings = {
         crazy-main-bar = {
           layer = "top";
+	  output = [ "Virtual-1" ];
 	  position = "top"; 
 	  height = 30;
-	  output = [ "Virtual-1" ];
+	  # width = ; 
 	  reload_style_on_change = true;
 
-	  modules-left = [ "tray" ];
-	  modules-center = [ "hyprland/workspaces" ];
-	  modules-right = [ "pulseaudio" "network" "clock" "power"];
+	  # ORGANISATION -------------------------------------
+
+	  modules-left = [ "custom/text" "hyprland/workspaces" "hyprland/window" ];
+	  modules-center = [ "clock" ];
+	  modules-right = [ "cava" "pulseaudio" "privacy" "backlight/slider" 
+	                    "group/hardware" "power"];
+
+	  # GROUPS -------------------------------------------
+
+          "group/hardware" = {
+            orientation = "vertical";
+	    modules = [
+              "cpu" "memory" "temperature" "disk"
+	    ];
+	  };
+
+
+	  # MODULES CONFIG ----------------------------------- 
+	  "custom/text" = { format = "  Hey there, Samurai.; "; };
 
 	  "hyprland/workspaces" = {
             format = "{icon}";
+	    icon-size = 18;
 	    format-icons = {
-              active = "";
-	      default = "";
-	      empty = "";
+              active = "";
+	      default = "";
+	      empty = "󰼮";
+	      urgent = "󱑽";
 	    };
-	    persistent-workspaces = { "*" = [ 1 2 3 4 5 ]; };
+	    persistent-workspaces = { "*" = 5; };
 	  };
+
+	  "hyprland/window" = {
+            format = "󰘨 {} 󰘨";
+	    icon   = false;
+	    icon-size = 24;
+	    separate-outputs = true;
+	    rewrite = {  # FIXME
+              "(.*)Mozilla Firefox" = "󰯊 $1";
+	      "vim (.*)" = " $1";
+	      "foot (.*)" = " $1";
+	    };
+	  };
+
 	  clock = {
 	    format = "{:%H:%M }";
 	    interval = 60;
-	    tooltip-format = "<tt>{calendar}</tt>";
 	    timezone = "America/Sao_Paulo";
 
-            calendar = {
+	    tooltip-format = "<tt><small>{calendar}</small></tt>";   
+	    calendar = {
+	      mode = "month";
+	      mode-mon-col = 4;
 	      format = {
-                today = "<span color='#fAfBfC'><b>{}</b></span>";
+	        months=     "<span color='#ffead3'><b>{}</b></span>";
+                days=       "<span color='#ecc6d9'><b>{}</b></span>";
+                weeks=      "<span color='#99ffdd'><b>W{}</b></span>";
+                weekdays=   "<span color='#ffcc66'><b>{}</b></span>";
+                today=      "<span color='#ff6699'><b><u>{}</u></b></span>";
 	      };
 	    };
 	    actions = {
-              on-click-right = "shift_down";
-	      on-click = "shift_up";
+	      on-click-right = "mode";
+	      on-scroll-up = "shift_down";
+	      on-scroll-down="shift_up";
 	    };
 	  };
 	};
@@ -367,6 +406,10 @@
 
     neovim = {
       enable = true; 
+    };
+
+    cava = {
+      enable = true;
     };
   };
 }

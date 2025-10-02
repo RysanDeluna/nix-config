@@ -50,7 +50,7 @@
     };
     xserver = {
       enable = true;
-      desktopManager.gnome.enable = true;
+      #desktopManager.gnome.enable = true;
       excludePackages = with pkgs; [ xterm ];
       xkb = {
         layout = "br";
