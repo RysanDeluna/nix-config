@@ -20,13 +20,14 @@
   home.packages = [
     # # Adds the 'hello' command to your environment. It prints a friendly
     # # "Hello, world!" when run.
+    pkgs.tree
     pkgs.hello
-    pkgs.nordic
-    pkgs.rose-pine-cursor
-    pkgs.waypaper
-    pkgs.swww
-    pkgs.dconf-editor
-    pkgs.nwg-look
+    pkgs.nordic            # theme
+    pkgs.rose-pine-cursor  # Cursor pack
+    pkgs.waypaper          # Wallpaper
+    pkgs.swww              # Wallpaper
+    pkgs.dconf-editor   # GTK editor
+    pkgs.nwg-look       # theming
     # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the
     # # parentheses. Maybe you want to install Nerd Fonts with a limited number of
@@ -47,13 +48,7 @@
     # # Building this configuration will create a copy of 'dotfiles/screenrc' in
     # # the Nix store. Activating the configuration will then make '~/.screenrc' a
     # # symlink to the Nix store copy.
-    # ".screenrc".source = dotfiles/screenrc;
-
-    # # You can also set the file content immediately.
-    # ".gradle/gradle.properties".text = ''
-    #   org.gradle.console=verbose
-    #   org.gradle.daemon.idletimeout=3600000
-    # '';
+    ".config/waybar/style.css".source = ./waybar/style.css;
   };
 
   # Home Manager can also manage your environment variables through
@@ -186,7 +181,6 @@
 	  "waypaper --restore"
 	  "waybar"
 	  "mako"
-	  "$terminal"
 	];
 
 	monitor = "Virtual-1,1440x900@59,0x0,1";
@@ -331,8 +325,8 @@
 
 	  modules-left = [ "custom/text" "hyprland/workspaces" "hyprland/window" ];
 	  modules-center = [ "clock" ];
-	  modules-right = [ "cava" "pulseaudio" "privacy" "backlight/slider" 
-	                    "group/hardware" "power"];
+	  modules-right = [ "group/expand-1" "privacy" "backlight/slider" 
+	                    "group/hardware" ];
 
 	  # GROUPS -------------------------------------------
 
@@ -394,6 +388,17 @@
 	      on-scroll-down="shift_up";
 	    };
 	  };
+	  
+	  "group/expand-1" = {
+	    orientation = "horizontal";
+            modules = ["pulseaudio" "pulseaudio/slider"];
+	    drawer = {
+	      transition-durantion = 600;
+	      children-class = "drawer-3";
+	      transition-to-left = true;
+              click-to-reveal = true;
+ 	    };
+	  };
 	};
       };
     };
@@ -410,6 +415,19 @@
 
     cava = {
       enable = true;
+      settings = {
+        general = {
+          mode = "normal";
+	  framerate = 30;
+	  autosens = 1;
+	  overshoot = 20; 
+	  bars = "auto";
+	};
+	input = {
+          method = "pipewire";
+	  source = "auto";
+	};
+      }; 
     };
   };
 }
