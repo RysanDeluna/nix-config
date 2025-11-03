@@ -4,6 +4,12 @@
   font-size: 15px;
 }
 
+window#waybar {
+  background: #0F0F17;
+  border: 3px solid rgba(255,255,255,0.1);
+  border-radius: 10px;
+}
+
 #workspaces {
   background: rgba(23,23,23,0.0); 
   color: #888789;

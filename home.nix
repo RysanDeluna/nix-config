@@ -45,10 +45,8 @@
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.
   home.file = {
-    # # Building this configuration will create a copy of 'dotfiles/screenrc' in
-    # # the Nix store. Activating the configuration will then make '~/.screenrc' a
-    # # symlink to the Nix store copy.
-    ".config/waybar/style.css".source = ./waybar/style.css;
+    # mutable files, edit the config and doesnt need to rebuild
+    ".config/waybar/style.css".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/waybar/style.css";
   };
 
   # Home Manager can also manage your environment variables through
@@ -326,19 +324,76 @@
 	  modules-left = [ "custom/text" "hyprland/workspaces" "hyprland/window" ];
 	  modules-center = [ "clock" ];
 	  modules-right = [ "group/expand-1" "privacy" "backlight/slider" 
-	                    "group/hardware" ];
+	                    "group/hardware" "group/power-group"];
 
 	  # GROUPS -------------------------------------------
 
           "group/hardware" = {
-            orientation = "vertical";
+            orientation = "horizontal";
 	    modules = [
-              "cpu" "memory" "temperature" "disk"
+              "cpu" "memory" "temperature" 
 	    ];
+	    drawer = {
+	      transition-durantion = 500;
+	      children-class = "drawer-1";
+	      transition-left-to-right = true;
+              click-to-reveal = true;
+	    };
 	  };
 
+	  "group/power-group" = {
+            orientation = "horizontal";
+	    modules = ["custom/power" "custom/reboot" "custom/quit" ];
+            drawer = {
+              transition-duration = 400;
+	      children-class = "not-power";
+              transition-left-to-right = false;
+            };
+          };
+
+	  "group/expand-1" = {
+	    orientation = "horizontal";
+            modules = ["pulseaudio" "pulseaudio/slider"];
+	    drawer = {
+	      transition-durantion = 600;
+	      children-class = "drawer-3";
+	      transition-to-left = true;
+              click-to-reveal = true;
+ 	    };
+	  };
 
 	  # MODULES CONFIG ----------------------------------- 
+	  "custom/quit" = {
+	    format = "󰗼"; tooltip = false; on-click = "hyprctl dispatch exit"; 
+          };
+	  #"custom/lock" = {
+          #  format = "󰍁"; tooltip = false; on-click = ""
+	  #};
+	  "custom/reboot" = {
+            format = "󰜉"; tooltip = false; on-click = "reboot";
+	  };
+	  "custom/power" = {
+            format = ""; tooltip = false; on-click = "shutdown now";
+	  };
+
+	  memory = {
+            interval = 5; rotate = 270; format = "{icon}";
+            format-icons = ["󰝦" "󰪞" "󰪟" "󰪠" "󰪡" "󰪢" "󰪣" "󰪤" "󰪥"];
+            max-length = 10; 
+          };
+
+	  cpu = {
+            interval = 5; rotate = 270; format = "{icon}";
+            format-icons = ["󰝦" "󰪞" "󰪟" "󰪠" "󰪡" "󰪢" "󰪣" "󰪤" "󰪥"];
+            max-length = 10; 
+          };
+
+          temperature = {
+            interval  = 1; critical-threshold = 85; 
+            format = "{icon}";
+            format-icons = ["" "" "" "" ""];
+          };
+
 	  "custom/text" = { format = "  Hey there, Samurai.; "; };
 
 	  "hyprland/workspaces" = {
@@ -365,6 +420,29 @@
 	    };
 	  };
 
+          pulseaudio = {
+            format = "{icon}";
+            rotate = 0; 
+            format-muted = "婢";
+            tooltip-format = "{icon} {desc} // {volume}%";
+            scroll-step = 5;
+            format-icons = {
+              default =  ["" "" ""];
+              headphone = "";
+              hands-free =  "";
+              headset = "";
+              phone = "";
+              portable =  "";
+              car = "";
+            };
+          };
+          "pulseaudio/slider"  = {
+            min = 5; max = 100;
+            rotate = 0; 
+            device = "pulseaudio";
+            scroll-step = 1;
+          };
+
 	  clock = {
 	    format = "{:%H:%M }";
 	    interval = 60;
@@ -389,16 +467,6 @@
 	    };
 	  };
 	  
-	  "group/expand-1" = {
-	    orientation = "horizontal";
-            modules = ["pulseaudio" "pulseaudio/slider"];
-	    drawer = {
-	      transition-durantion = 600;
-	      children-class = "drawer-3";
-	      transition-to-left = true;
-              click-to-reveal = true;
- 	    };
-	  };
 	};
       };
     };
