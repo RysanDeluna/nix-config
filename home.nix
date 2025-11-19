@@ -1,5 +1,8 @@
 { config, pkgs, lib, ... }:
 
+let
+  customNeovim = import ./config/nvim/nvim.nix;
+in
 {
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
@@ -83,6 +86,7 @@
 
   home.sessionVariables = {
     EDITOR = "nvim";
+    NVIM_CONFIG_DIR = "${config.home.homeDirectory}/.dotfiles/config/nvim/";
   };
 
   wayland = {
@@ -323,7 +327,7 @@
 
 	  modules-left = [ "custom/text" "hyprland/workspaces" "hyprland/window" ];
 	  modules-center = [ "clock" ];
-	  modules-right = [ "group/expand-1" "privacy" "backlight/slider" 
+	  modules-right = [ "group/audio" "network" "privacy" "backlight/slider" 
 	                    "group/hardware" "group/power-group"];
 
 	  # GROUPS -------------------------------------------
@@ -351,12 +355,12 @@
             };
           };
 
-	  "group/expand-1" = {
+	  "group/audio" = {
 	    orientation = "horizontal";
             modules = ["pulseaudio" "pulseaudio/slider"];
 	    drawer = {
 	      transition-durantion = 600;
-	      children-class = "drawer-3";
+	      children-class = "drawer-2";
 	      transition-to-left = true;
               click-to-reveal = true;
  	    };
@@ -377,13 +381,13 @@
 	  };
 
 	  memory = {
-            interval = 5; rotate = 270; format = "{icon}";
+            interval = 5; rotate = 0; format = "{icon}";
             format-icons = ["󰝦" "󰪞" "󰪟" "󰪠" "󰪡" "󰪢" "󰪣" "󰪤" "󰪥"];
             max-length = 10; 
           };
 
 	  cpu = {
-            interval = 5; rotate = 270; format = "{icon}";
+            interval = 5; rotate = 0; format = "{icon}";
             format-icons = ["󰝦" "󰪞" "󰪟" "󰪠" "󰪡" "󰪢" "󰪣" "󰪤" "󰪥"];
             max-length = 10; 
           };
@@ -400,16 +404,15 @@
             format = "{icon}";
 	    icon-size = 18;
 	    format-icons = {
-              active = "";
-	      default = "";
-	      empty = "󰼮";
-	      urgent = "󱑽";
+              active = "";
+	      default = "";
 	    };
 	    persistent-workspaces = { "*" = 5; };
 	  };
 
 	  "hyprland/window" = {
-            format = "󰘨 {} 󰘨";
+            format = "<span  weight='bold' >{class}</span>";
+	    max-length = 120;
 	    icon   = false;
 	    icon-size = 24;
 	    separate-outputs = true;
@@ -419,6 +422,18 @@
 	      "foot (.*)" = " $1";
 	    };
 	  };
+
+          network = {
+            tooltip = true; 
+            format-wifi = "{icon} "; 
+            format-icons = ["󰤟" "󰤢" "󰤥"];
+            format-ethernet= "󰈀 ";
+            tooltip-format = "Network: <big><b>{essid}</b></big>\nSignal strength: <b>{signaldBm}dBm ({signalStrength}%)</b>\nFrequency: <b>{frequency}MHz</b>\nInterface: <b>{ifname}</b>\nIP: <b>{ipaddr}/{cidr}</b>\nGateway: <b>{gwaddr}</b>\nNetmask: <b>{netmask}</b>";
+            format-linked = "󰈀 {ifname} (No IP)";
+            format-disconnected =  " ";
+            tooltip-format-disconnected = "Disconnected";
+            interval = 2;
+          };
 
           pulseaudio = {
             format = "{icon}";
@@ -477,9 +492,7 @@
       enable = true;
     };
 
-    neovim = {
-      enable = true; 
-    };
+    neovim = customNeovim pkgs;
 
     cava = {
       enable = true;
