@@ -3,13 +3,21 @@ local g = vim.g
 
 g.mapleader = ' '
 
+vim.cmd [[
+    set nowrap
+    set nobackup
+    set nowritebackup
+    set noerrorbells
+    set noswapfile
+]]
+
 -- undo files
 opt.undofile = true
 opt.undodir = "/home/ni/.cache"
 
--- identation
+-- indentation
 opt.smartindent = true
-opt.autoident = true
+opt.autoindent = true
 opt.tabstop = 4
 opt.shiftwidth = 4
 opt.expandtab = true
