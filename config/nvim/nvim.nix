@@ -5,6 +5,7 @@ pkgs:
   extraConfig = ''
     luafile $NVIM_CONFIG_DIR/lua/settings.lua
     luafile $NVIM_CONFIG_DIR/lua/treesitter.lua
+    luafile $NVIM_CONFIG_DIR/lua/lualine.lua
 
     lua << EOF
       vim.defer_fn(function()
@@ -17,8 +18,6 @@ pkgs:
   /* source $NVIM_CONFIG_DIR/colors/scheme.vim */
 
   plugins = with pkgs.vimPlugins; [
-    indentLine
-
     # File tree
     nvim-web-devicons
     nvim-tree-lua
@@ -32,7 +31,10 @@ pkgs:
     cmp-nvim-lsp
 
     # Eye candy
+    indentLine
     nvim-treesitter.withAllGrammars
+    lualine-nvim
+    bufferline-nvim
 
     vim-nix
     
