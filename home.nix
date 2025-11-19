@@ -1,28 +1,23 @@
-{ config, pkgs, lib, ... }:
+{ config, pkgs, ... }:
+
 
 let
   customNeovim = import ./config/nvim/nvim.nix;
 in
 {
-  # Home Manager needs a bit of information about you and the paths it should
-  # manage.
-  home.username = "ni";
-  home.homeDirectory = "/home/ni";
-
-  # This value determines the Home Manager release that your configuration is
-  # compatible with. This helps avoid breakage when a new Home Manager release
-  # introduces backwards incompatible changes.
-  #
-  # You should not change this value, even if you update Home Manager. If you do
-  # want to update the value, then make sure to first check the Home Manager
-  # release notes.
-  home.stateVersion = "25.05"; # Please read the comment before changing.
+  home = {
+    username = "ni";
+    homeDirectory = "/home/ni";
+    stateVersion = "25.05";
+    sessionVariables = {
+      EDITOR = "nvim";
+      NVIM_CONFIG_DIR = "${config.home.homeDirectory}/.dotfiles/config/nvim/";
+    };
+  };
 
   # The home.packages option allows you to install Nix packages into your
   # environment.
   home.packages = [
-    # # Adds the 'hello' command to your environment. It prints a friendly
-    # # "Hello, world!" when run.
     pkgs.tree
     pkgs.hello
     pkgs.nordic            # theme
@@ -31,6 +26,12 @@ in
     pkgs.swww              # Wallpaper
     pkgs.dconf-editor   # GTK editor
     pkgs.nwg-look       # theming
+
+    # LSPs
+    pkgs.nixd
+    pkgs.lua-language-server
+
+
     # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the
     # # parentheses. Maybe you want to install Nerd Fonts with a limited number of
@@ -45,35 +46,9 @@ in
     # '')
   ];
 
-  # Home Manager is pretty good at managing dotfiles. The primary way to manage
-  # plain files is through 'home.file'.
   home.file = {
     # mutable files, edit the config and doesnt need to rebuild
     ".config/waybar/style.css".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/waybar/style.css";
-  };
-
-  # Home Manager can also manage your environment variables through
-  # 'home.sessionVariables'. These will be explicitly sourced when using a
-  # shell provided by Home Manager. If you don't want to manage your shell
-  # through Home Manager then you have to manually source 'hm-session-vars.sh'
-  # located at either
-  #
-  #  ~/.nix-profile/etc/profile.d/hm-session-vars.sh
-  #
-  # or
-  #
-  #  ~/.local/state/nix/profiles/profile/etc/profile.d/hm-session-vars.sh
-  #
-  # or
-  #
-  #  /etc/profiles/per-user/ni/etc/profile.d/hm-session-vars.sh
-  #
-  gtk = {
-    enable = true;
-    theme = {
-      name = "Nordic";
-      package = null;
-    };
   };
 
   home.pointerCursor = {
@@ -84,9 +59,12 @@ in
     x11.enable = true;          
   };
 
-  home.sessionVariables = {
-    EDITOR = "nvim";
-    NVIM_CONFIG_DIR = "${config.home.homeDirectory}/.dotfiles/config/nvim/";
+  gtk = {
+    enable = true;
+    theme = {
+      name = "Nordic";
+      package = null;
+    };
   };
 
   wayland = {
