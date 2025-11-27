@@ -3,17 +3,7 @@ pkgs:
   enable = true;
   vimAlias = true;
   extraConfig = ''
-    luafile $NVIM_CONFIG_DIR/lua/settings.lua
-    luafile $NVIM_CONFIG_DIR/lua/treesitter.lua
-    luafile $NVIM_CONFIG_DIR/lua/lualine.lua
-
-    lua << EOF
-      vim.defer_fn(function()
-        vim.cmd [[
-          luafile $NVIM_CONFIG_DIR/lua/lsp.lua
-        ]]
-      end, 70)
-    EOF
+    luafile $NVIM_CONFIG_DIR/init.lua
   '';
   /* source $NVIM_CONFIG_DIR/colors/scheme.vim */
 
@@ -35,6 +25,8 @@ pkgs:
     nvim-treesitter.withAllGrammars
     lualine-nvim
     bufferline-nvim
+    fidget-nvim
+    gitsigns-nvim
 
     vim-nix
     

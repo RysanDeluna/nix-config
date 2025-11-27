@@ -11,44 +11,17 @@ in
     stateVersion = "25.05";
     sessionVariables = {
       EDITOR = "nvim";
-      NVIM_CONFIG_DIR = "${config.home.homeDirectory}/.dotfiles/config/nvim/";
+      NVIM_CONFIG_DIR = "${config.home.homeDirectory}/.dotfiles/config/nvim";
     };
   };
 
-  # The home.packages option allows you to install Nix packages into your
-  # environment.
-  home.packages = [
-    pkgs.tree
-    pkgs.hello
-    pkgs.nordic            # theme
-    pkgs.rose-pine-cursor  # Cursor pack
-    pkgs.waypaper          # Wallpaper
-    pkgs.swww              # Wallpaper
-    pkgs.dconf-editor   # GTK editor
-    pkgs.nwg-look       # theming
-
-    # LSPs
-    pkgs.nixd
-    pkgs.lua-language-server
-
-
-    # # It is sometimes useful to fine-tune packages, for example, by applying
-    # # overrides. You can do that directly here, just don't forget the
-    # # parentheses. Maybe you want to install Nerd Fonts with a limited number of
-    # # fonts?
-    # (pkgs.nerdfonts.override { fonts = [ "FantasqueSansMono" ]; })
-
-    # # You can also create simple shell scripts directly inside your
-    # # configuration. For example, this adds a command 'my-hello' to your
-    # # environment:
-    # (pkgs.writeShellScriptBin "my-hello" ''
-    #   echo "Hello, ${config.home.username}!"
-    # '')
-  ];
-
   home.file = {
     # mutable files, edit the config and doesnt need to rebuild
-    ".config/waybar/style.css".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/waybar/style.css";
+    ".config/waybar/style.css".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/config/waybar/style.css";
+    ".config/nvim/lua" = {
+      source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/config/nvim/lua";
+      recursive = true;
+    };
   };
 
   home.pointerCursor = {
@@ -268,15 +241,54 @@ in
     };
   };
   
+
+  # The home.packages option allows you to install Nix packages into your
+  # environment.
+  home.packages = [
+    pkgs.tree
+    pkgs.hello
+    pkgs.nordic            # theme
+    pkgs.rose-pine-cursor  # Cursor pack
+    pkgs.waypaper          # Wallpaper
+    pkgs.swww              # Wallpaper
+    pkgs.dconf-editor   # GTK editor
+    pkgs.nwg-look       # theming
+
+    # LSPs
+    pkgs.nixd
+    pkgs.lua-language-server
+
+    # Utils
+    pkgs.wl-clipboard
+    pkgs.gcc
+
+    # # It is sometimes useful to fine-tune packages, for example, by applying
+    # # overrides. You can do that directly here, just don't forget the
+    # # parentheses. Maybe you want to install Nerd Fonts with a limited number of
+    # # fonts?
+    # (pkgs.nerdfonts.override { fonts = [ "FantasqueSansMono" ]; })
+
+    # # You can also create simple shell scripts directly inside your
+    # # configuration. For example, this adds a command 'my-hello' to your
+    # # environment:
+    # (pkgs.writeShellScriptBin "my-hello" ''
+    #   echo "Hello, ${config.home.username}!"
+    # '')
+  ];
+
   programs = {
     home-manager.enable = true;
+
+    # Utils
+    ripgrep.enable = true;
+    fd.enable = true;
 
     git = {
       enable = true;
       userName = "RysanDeluna";
       userEmail = "ry.marco.andrade@gmail.com";
       extraConfig = {
-	init.DefaultBranch = "main";
+	    init.DefaultBranch = "main";
       };
     };
 
