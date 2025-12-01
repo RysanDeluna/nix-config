@@ -18,10 +18,10 @@ in
   home.file = {
     # mutable files, edit the config and doesnt need to rebuild
     ".config/waybar/style.css".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/config/waybar/style.css";
-    ".config/nvim/lua" = {
-      source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/config/nvim/lua";
-      recursive = true;
-    };
+  };
+  xdg.configFile."nvim" = {
+    recursive = true;
+    source = ./config/nvim;
   };
 
   home.pointerCursor = {

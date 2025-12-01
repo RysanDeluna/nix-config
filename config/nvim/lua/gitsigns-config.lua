@@ -1,7 +1,7 @@
 -- Creates git indications
 --
 
-require'gitsigns'.setup {
+require'gitsigns'.setup({
   opts = {
     signs = {
       add = { text = '+' },
@@ -11,4 +11,4 @@ require'gitsigns'.setup {
       changedelete = { text = '~' },
     },
   },
-}
+})

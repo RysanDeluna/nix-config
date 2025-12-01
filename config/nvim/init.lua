@@ -2,9 +2,9 @@
 --
 
 require("settings")
+require("fidget-config")
 require("treesitter")
-require("lualine")
-require("cmp")
 require("lsp")
-require("fidget")
-require("gitsigns")
+require("filetree")
+require("lualine-config")
+require("gitsigns-config")

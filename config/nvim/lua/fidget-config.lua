@@ -1,9 +1,6 @@
 -- Notification and progress bar for processes
 --
 --
---aksmdkasmdka
---kamsdkasm
---
 
 require("fidget").setup {
   -- Options related to LSP progress subsystem
