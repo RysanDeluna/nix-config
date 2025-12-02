@@ -24,9 +24,13 @@ pkgs:
   '';
 
   plugins = with pkgs.vimPlugins; [
-    # File tree
     vim-sensible
-    nvim-web-devicons
+
+    { # Para ver atalhos
+      plugin = which-key-nvim;
+      type = "lua";
+      config = builtins.readFile ./lua/which-key-config.lua;
+    }
 
     { # File Tree
       plugin = nvim-tree-lua;
@@ -63,6 +67,16 @@ pkgs:
       plugin = gitsigns-nvim;
       type = "lua";
       config = builtins.readFile ./lua/gitsigns-config.lua;
+    }
+
+    plenary-nvim
+    nvim-web-devicons
+    telescope-fzf-native-nvim
+    telescope-ui-select-nvim
+    { # Telescope
+      plugin = telescope-nvim;
+      type = "lua";
+      config = builtins.readFile ./lua/telescope-config.lua;
     }
 
     # Eye candy

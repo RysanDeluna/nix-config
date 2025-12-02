@@ -25,4 +25,3 @@ require("blink.cmp").setup({
     },
     signature = { enabled = true },
 })
-require("blink.cmp.fuzzy").set_implementation("rust")
