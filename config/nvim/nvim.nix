@@ -6,7 +6,7 @@ pkgs:
   enable = true;
   vimAlias = true;
 
-  extraPackages = with pkgs; [
+  extraPackages = with pkgs; [  # Dependencies
     # TS
     tree-sitter
 
@@ -46,6 +46,7 @@ pkgs:
       config = builtins.readFile ./lua/fidget-config.lua; 
     }
 
+    luasnip
     { # blink autocompletion
       plugin = blink-cmp;
       type = "lua";
