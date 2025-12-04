@@ -1,7 +1,9 @@
 -- Only starts every module
 --
 
+require("definitions")
 require("settings")
+require("colorschemes")
 require("fidget-config")
 require("treesitter")
 require("lsp")

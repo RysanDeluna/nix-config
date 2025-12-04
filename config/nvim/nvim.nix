@@ -79,9 +79,22 @@ pkgs:
       config = builtins.readFile ./lua/telescope-config.lua;
     }
 
-    # Eye candy
+    # ------------ Eye candy ---------------
     indentLine
     nvim-treesitter.withAllGrammars
     vim-nix
+
+
+    { # ---------- COLORSCHEMES ------------
+      plugin = nordic-nvim;
+      type = "lua";
+      config = builtins.readFile ./lua/colorschemes/nordic-config.lua;
+    }
+    {
+      plugin = everforest;
+      type = "lua";
+      config = builtins.readFile ./lua/colorschemes/everforest-config.lua;
+    }
+
   ];
 }
