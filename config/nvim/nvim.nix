@@ -14,6 +14,10 @@ pkgs:
     lua-language-server
     nixd
 
+    # format
+    stylua
+    nixfmt
+
     # Telescope
     ripgrep
     fd
@@ -69,6 +73,13 @@ pkgs:
       config = builtins.readFile ./lua/gitsigns-config.lua;
     }
 
+    {
+      plugin = conform-nvim;
+      type = "lua";
+      config = builtins.readFile ./lua/conform-config.lua;
+    }
+
+    nvim-colorizer-lua
     plenary-nvim
     nvim-web-devicons
     telescope-fzf-native-nvim
@@ -89,11 +100,6 @@ pkgs:
       plugin = nordic-nvim;
       type = "lua";
       config = builtins.readFile ./lua/colorschemes/nordic-config.lua;
-    }
-    {
-      plugin = everforest;
-      type = "lua";
-      config = builtins.readFile ./lua/colorschemes/everforest-config.lua;
     }
 
   ];

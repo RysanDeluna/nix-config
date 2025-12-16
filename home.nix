@@ -60,9 +60,8 @@ in
 	};
 
 	decoration = {
-          rounding = 0; 
-
-	  active_opacity = 1.0;
+      rounding = 0; 
+      active_opacity = 1.0;
 	  inactive_opacity = 0.98; 
 
 	  shadow = {
@@ -81,16 +80,14 @@ in
 	};
 
 	animations = {
-          enabled = true;
-
+      enabled = true;
 	  bezier = [
-            "easeOutQuint,0.23,1,0.32,1"
+        "easeOutQuint,0.23,1,0.32,1"
 	    "easeInOutCubic,0.65,0.05,0.36,1"
 	    "linear,0,0,1,1"
 	    "almostLinear,0.5,0.5,0.75,1.0"
 	    "quick,0.15,0,0.1,1"
 	  ];
-
 	  animation = [
 	    # Name	    	# on	# speed # curve		# etc
 	    "global, 		1, 	10,	default				"
@@ -111,7 +108,7 @@ in
 	};
 
 	dwindle = {
-          pseudotile = true;
+      pseudotile = true;
 	  preserve_split = true;
 	  force_split = 2; 
 	};
@@ -124,13 +121,13 @@ in
 	  focus_on_activate = true; 
 	};
 
-
 	"$terminal" = "foot";
 	"$fileManager" = "nautilus --new-window";
 	"$menu" = "wofi --show drun";
 	"$mod" = "SUPER";
 
 	exec-once = [
+      "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=$XDG_CURRENT_DESKTOP PATH"
 	  "waypaper --restore"
 	  "waybar"
 	  "mako"
@@ -161,8 +158,6 @@ in
 	  follow_mouse = 2;
 	  sensitivity = 0;
 	  touchpad = { natural_scroll = false; };
-
-
 	};
 
 	cursor = { 
@@ -251,8 +246,9 @@ in
     pkgs.rose-pine-cursor  # Cursor pack
     pkgs.waypaper          # Wallpaper
     pkgs.swww              # Wallpaper
-    pkgs.dconf-editor   # GTK editor
-    pkgs.nwg-look       # theming
+    pkgs.dconf-editor      # GTK editor
+    pkgs.nwg-look          # theming
+    pkgs.nautilus          # file manager
 
     # LSPs
     pkgs.nixd
@@ -301,82 +297,81 @@ in
     };
 
     foot.enable = true;
-    
     waybar = {
       enable = true;
       settings = {
         crazy-main-bar = {
           layer = "top";
-	  output = [ "Virtual-1" ];
-	  position = "top"; 
-	  height = 30;
-	  # width = ; 
-	  reload_style_on_change = true;
+          output = [ "Virtual-1" ];
+          position = "top"; 
+          height = 30;
+          # width = ; 
+          reload_style_on_change = true;
 
-	  # ORGANISATION -------------------------------------
+          # ORGANISATION -------------------------------------
 
-	  modules-left = [ "custom/text" "hyprland/workspaces" "hyprland/window" ];
-	  modules-center = [ "clock" ];
-	  modules-right = [ "group/audio" "network" "privacy" "backlight/slider" 
-	                    "group/hardware" "group/power-group"];
+          modules-left = [ "custom/text" "hyprland/workspaces" "hyprland/window" ];
+          modules-center = [ "clock" ];
+          modules-right = [ "group/audio" "network" "privacy" "backlight/slider" 
+                            "group/hardware" "group/power-group"];
 
-	  # GROUPS -------------------------------------------
+          # GROUPS -------------------------------------------
 
           "group/hardware" = {
             orientation = "horizontal";
-	    modules = [
+            modules = [
               "cpu" "memory" "temperature" 
-	    ];
-	    drawer = {
-	      transition-durantion = 500;
-	      children-class = "drawer-1";
-	      transition-left-to-right = true;
-              click-to-reveal = true;
-	    };
-	  };
+            ];
+            drawer = {
+              transition-durantion = 500;
+              children-class = "drawer-1";
+              transition-left-to-right = true;
+                  click-to-reveal = true;
+            };
+	      };
 
-	  "group/power-group" = {
+          "group/power-group" = {
             orientation = "horizontal";
-	    modules = ["custom/power" "custom/reboot" "custom/quit" ];
+            modules = ["custom/power" "custom/reboot" "custom/quit" ];
             drawer = {
               transition-duration = 400;
-	      children-class = "not-power";
+	          children-class = "not-power";
               transition-left-to-right = false;
             };
           };
 
-	  "group/audio" = {
-	    orientation = "horizontal";
+          "group/audio" = {
+            orientation = "horizontal";
             modules = ["pulseaudio" "pulseaudio/slider"];
-	    drawer = {
-	      transition-durantion = 600;
-	      children-class = "drawer-2";
-	      transition-to-left = true;
+            drawer = {
+              transition-durantion = 600;
+              children-class = "drawer-2";
+              transition-to-left = true;
               click-to-reveal = true;
- 	    };
-	  };
+            };
+	      };
 
-	  # MODULES CONFIG ----------------------------------- 
-	  "custom/quit" = {
-	    format = "󰗼"; tooltip = false; on-click = "hyprctl dispatch exit"; 
+          # MODULES CONFIG ----------------------------------- 
+          "custom/quit" = {
+            format = "󰗼"; tooltip = false; on-click = "hyprctl dispatch exit"; 
           };
-	  #"custom/lock" = {
-          #  format = "󰍁"; tooltip = false; on-click = ""
-	  #};
-	  "custom/reboot" = {
-            format = "󰜉"; tooltip = false; on-click = "reboot";
-	  };
-	  "custom/power" = {
-            format = ""; tooltip = false; on-click = "shutdown now";
-	  };
+          #"custom/lock" = {
+              #  format = "󰍁"; tooltip = false; on-click = ""
+          #};
+          "custom/reboot" = {
+                format = "󰜉"; tooltip = false; on-click = "reboot";
+          };
+          "custom/power" = {
+                format = ""; tooltip = false; on-click = "shutdown now";
+          };
 
-	  memory = {
+          memory = {
             interval = 5; rotate = 0; format = "{icon}";
             format-icons = ["󰝦" "󰪞" "󰪟" "󰪠" "󰪡" "󰪢" "󰪣" "󰪤" "󰪥"];
             max-length = 10; 
           };
 
-	  cpu = {
+          cpu = {
             interval = 5; rotate = 0; format = "{icon}";
             format-icons = ["󰝦" "󰪞" "󰪟" "󰪠" "󰪡" "󰪢" "󰪣" "󰪤" "󰪥"];
             max-length = 10; 
@@ -388,30 +383,30 @@ in
             format-icons = ["" "" "" "" ""];
           };
 
-	  "custom/text" = { format = "  Hey there, Samurai.; "; };
+	      "custom/text" = { format = "  Hey there, Samurai.; "; };
 
-	  "hyprland/workspaces" = {
+          "hyprland/workspaces" = {
             format = "{icon}";
-	    icon-size = 18;
-	    format-icons = {
+            icon-size = 18;
+            format-icons = {
               active = "";
-	      default = "";
-	    };
-	    persistent-workspaces = { "*" = 5; };
-	  };
+              default = "";
+            };
+            persistent-workspaces = { "*" = 5; };
+          };
 
-	  "hyprland/window" = {
+          "hyprland/window" = {
             format = "<span  weight='bold' >{class}</span>";
-	    max-length = 120;
-	    icon   = false;
-	    icon-size = 24;
-	    separate-outputs = true;
-	    rewrite = {  # FIXME
+            max-length = 120;
+            icon   = false;
+            icon-size = 24;
+            separate-outputs = true;
+            rewrite = {  # FIXME
               "(.*)Mozilla Firefox" = "󰯊 $1";
-	      "vim (.*)" = " $1";
-	      "foot (.*)" = " $1";
-	    };
-	  };
+              "vim (.*)" = " $1";
+              "foot (.*)" = " $1";
+            };
+          };
 
           network = {
             tooltip = true; 
@@ -448,31 +443,30 @@ in
             scroll-step = 1;
           };
 
-	  clock = {
-	    format = "{:%H:%M }";
-	    interval = 60;
-	    timezone = "America/Sao_Paulo";
+          clock = {
+            format = "{:%H:%M }";
+            interval = 60;
+            timezone = "America/Sao_Paulo";
 
-	    tooltip-format = "<tt><small>{calendar}</small></tt>";   
-	    calendar = {
-	      mode = "month";
-	      mode-mon-col = 4;
-	      format = {
-	        months=     "<span color='#ffead3'><b>{}</b></span>";
+            tooltip-format = "<tt><small>{calendar}</small></tt>";   
+            calendar = {
+              mode = "month";
+              mode-mon-col = 4;
+              format = {
+                months=     "<span color='#ffead3'><b>{}</b></span>";
                 days=       "<span color='#ecc6d9'><b>{}</b></span>";
                 weeks=      "<span color='#99ffdd'><b>W{}</b></span>";
                 weekdays=   "<span color='#ffcc66'><b>{}</b></span>";
                 today=      "<span color='#ff6699'><b><u>{}</u></b></span>";
-	      };
-	    };
-	    actions = {
-	      on-click-right = "mode";
-	      on-scroll-up = "shift_down";
-	      on-scroll-down="shift_up";
-	    };
-	  };
-	  
-	};
+              };
+            };
+            actions = {
+              on-click-right = "mode";
+              on-scroll-up = "shift_down";
+              on-scroll-down="shift_up";
+            };
+          };
+        };
       };
     };
     wofi = {
@@ -484,21 +478,21 @@ in
 
     neovim = customNeovim pkgs;
 
-    cava = {
+    cava = {  # FIXME
       enable = true;
       settings = {
         general = {
           mode = "normal";
-	  framerate = 30;
-	  autosens = 1;
-	  overshoot = 20; 
-	  bars = "auto";
-	};
-	input = {
+          framerate = 30;
+          autosens = 1;
+          overshoot = 20; 
+          bars = "auto";
+        };
+        input = {
           method = "pipewire";
-	  source = "auto";
-	};
-      }; 
+          source = "auto";
+        };
+      };
     };
   };
 }

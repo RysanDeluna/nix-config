@@ -14,6 +14,7 @@ require("blink.cmp").setup({
     },
     keymap = {
         preset = "default",
+        ['<Tab>'] = { 'select_and_accept', 'fallback' }
     },
     completion = {
         documentation = { auto_show = false, auto_show_delay_ms = 500 },
