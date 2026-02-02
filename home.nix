@@ -325,13 +325,13 @@ in
               transition-durantion = 500;
               children-class = "drawer-1";
               transition-left-to-right = true;
-                  click-to-reveal = true;
+              click-to-reveal = true;
             };
-	      };
+          };
 
           "group/power-group" = {
             orientation = "horizontal";
-            modules = ["custom/power" "custom/reboot" "custom/quit" ];
+            modules = ["custom/power" "custom/quit" "custom/reboot" ];
             drawer = {
               transition-duration = 400;
 	          children-class = "not-power";
@@ -358,7 +358,7 @@ in
               #  format = "󰍁"; tooltip = false; on-click = ""
           #};
           "custom/reboot" = {
-                format = "󰜉"; tooltip = false; on-click = "reboot";
+                format = ""; tooltip = false; on-click = "reboot";
           };
           "custom/power" = {
                 format = ""; tooltip = false; on-click = "shutdown now";
@@ -382,7 +382,7 @@ in
             format-icons = ["" "" "" "" ""];
           };
 
-	      "custom/text" = { format = "  Hey there, Samurai.; "; };
+	      "custom/text" = { format = "  Hey there, Samurai.;"; };
 
           "hyprland/workspaces" = {
             format = "{icon}";
@@ -411,10 +411,10 @@ in
             tooltip = true; 
             format-wifi = "{icon} "; 
             format-icons = ["󰤟" "󰤢" "󰤥"];
-            format-ethernet= "󰈀 ";
+            format-ethernet= "󰈀";
             tooltip-format = "Network: <big><b>{essid}</b></big>\nSignal strength: <b>{signaldBm}dBm ({signalStrength}%)</b>\nFrequency: <b>{frequency}MHz</b>\nInterface: <b>{ifname}</b>\nIP: <b>{ipaddr}/{cidr}</b>\nGateway: <b>{gwaddr}</b>\nNetmask: <b>{netmask}</b>";
             format-linked = "󰈀 {ifname} (No IP)";
-            format-disconnected =  " ";
+            format-disconnected =  "";
             tooltip-format-disconnected = "Disconnected";
             interval = 2;
           };
@@ -426,7 +426,7 @@ in
             tooltip-format = "{icon} {desc} // {volume}%";
             scroll-step = 5;
             format-icons = {
-              default =  ["" "" ""];
+              default =  [" " " " " "];
               headphone = "";
               hands-free =  "";
               headset = "";
@@ -436,7 +436,7 @@ in
             };
           };
           "pulseaudio/slider"  = {
-            min = 5; max = 100;
+            min = 0; max = 100;
             rotate = 0; 
             device = "pulseaudio";
             scroll-step = 1;
