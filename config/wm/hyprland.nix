@@ -1,0 +1,180 @@
+{ config, pkgs, ... }:
+{
+  wayland.windowManager.hyprland = {
+    enable = true;
+    package = null;
+    portalPackage = null;
+    systemd.variables = ["--all"];
+    settings = {
+      general = {
+        gaps_in = 2;
+        gaps_out = 6;
+        border_size = 2; 
+
+        "col.active_border" = "rgba(33ccffee) rgba(00ff99ee) 60deg";
+        "col.inactive_border" = "rgba(595959aa)";
+
+        resize_on_border = false;
+        layout = "dwindle";
+      };
+
+      decoration = {
+        rounding = 0; 
+        active_opacity = 1.0;
+        inactive_opacity = 0.98; 
+        shadow = { 
+          enabled = false;
+        };
+        blur = { 
+          enabled = false;
+        };
+      };
+
+      animations = {
+        enabled = true;
+        bezier = [
+          "easeOutQuint,0.23,1,0.32,1"
+          "easeInOutCubic,0.65,0.05,0.36,1"
+          "linear,0,0,1,1"
+          "almostLinear,0.5,0.5,0.75,1.0"
+          "quick,0.15,0,0.1,1"
+        ];
+        animation = [
+          # Name	  # on  # speed # curve         # etc
+          "global,      1,  10,     default				"
+          "border, 		1, 	5.39, 	easeOutQuint			"
+          "windows, 		1, 	4.79, 	easeOutQuint			"
+          "windowsIn, 	1, 	4.1, 	easeOutQuint,	popin 87%	" 
+          "windowsOut,	1, 	1.49,	linear, 	popin 87%	" 
+          "fadeIn, 		1, 	1.73,	almostLinear			"
+          "fadeOut, 		1, 	1.46,	almostLinear			"
+          "fade, 		1, 	3.03,	quick				"
+          "layers, 		1, 	3.81,	easeOutQuint			"
+          "layersIn, 		1, 	4, 	easeOutQuint, 	fade		"
+          "layersOut, 	1, 	1.5, 	linear, 	fade		"
+          "fadeLayersIn, 	1, 	1.79, 	almostLinear			"
+          "fadeLayersOut, 	1, 	1.39, 	almostLinear			"
+          "workspaces,	0,	0,	ease				"
+        ];
+      };
+
+      dwindle = {
+        pseudotile = true;
+        preserve_split = true;
+        force_split = 2; 
+      };
+
+      master.new_status = "master";
+
+      misc = {
+        disable_hyprland_logo = true;
+        disable_splash_rendering = true;
+        focus_on_activate = true; 
+      };
+
+      "$terminal" = "foot";
+      "$fileManager" = "nautilus --new-window";
+      "$menu" = "wofi --show drun";
+      "$mod" = "SUPER";
+
+      exec-once = [
+        "waypaper --restore"
+        "waybar"
+        "mako"
+        "foot"
+      ];
+
+      monitor = "Virtual-1,1440x900@59,0x0,1";
+      env = [
+        "GDK_BACKEND,wayland,x11,*"
+        "QT_STYLE_OVERRIDE,kvantum"
+        "SDL_VIDEODRIVER,wayland"
+        "MOZ_ENABLE_WAYLAND,1"
+        "ELECTRON_OZONE_PLATFORM_HINT,wayland"
+        "OZONE_PLATFORM,wayland"
+        "GSK_RENDERER,vulkan"
+        "XDG_SESSION_TYPE,wayland"
+
+        "XDG_CURRENT_DESKTOP,Hyprland"
+        "XDG_SESSION_DESKTOP,Hyprland"
+      ];
+      xwayland.force_zero_scaling = true;
+      ecosystem.no_update_news = true;
+
+      input = {
+        # keyboard ---------
+        kb_layout = "br";
+
+        # mouse ------------ 
+        follow_mouse = 2;
+        sensitivity = 0;
+        touchpad = { natural_scroll = false; };
+      };
+
+      cursor = { 
+        enable_hyprcursor = false;
+        inactive_timeout = 10;
+        no_warps = true;
+      };
+
+      bindmd = [
+        "$mod, mouse:272, Move Window, movewindow"
+        "$mod, mouse:273, Resize Window, resizewindow"
+      ];
+
+      bindd = [ # MODs,	KEY,	DESCR		DISPATCHER,	params "$mod,	W,	Close active,	killactive			" "$mod,	M,	Exit,		exit				" "$mod,	A,	Files,		exec,		$fileManager	" "$mod,	F11,	Fullscreen,	fullscreen,	1		" "$mod,	RETURN,	Terminal,	exec,		$terminal	" "$mod,	P,	dmenu	,	exec,		$menu		" "$mod,	V,	Floating, 	togglefloating,			" "$mod, 	F,	Force FS,	fullscreen,	0" "$mod,	j,	go down, 	movefocus,	d		" "$mod,	k,	go up	, 	movefocus,	u		" "$mod,	h,	go left	,	movefocus,	l		" "$mod,	l,	go right,	movefocus,	r		"
+          # MODs,	KEY,	DESCR		DISPATCHER,	params
+        "$mod,	W,	Close active,	killactive			"
+        "$mod,	M,	Exit,		exit				"
+        "$mod,	A,	Files,		exec,		$fileManager	"
+        "$mod,	F11,	Fullscreen,	fullscreen,	1		"
+        "$mod,	RETURN,	Terminal,	exec,		$terminal	"
+        "$mod,	P,	dmenu	,	exec,		$menu		"
+
+        "$mod,	V,	Floating, 	togglefloating,			"
+        "$mod, 	F,	Force FS,	fullscreen,	0"
+
+        "$mod,	j,	go down, 	movefocus,	d		"
+        "$mod,	k,	go up	, 	movefocus,	u		"
+        "$mod,	h,	go left	,	movefocus,	l		"
+        "$mod,	l,	go right,	movefocus,	r		"
+
+        "$mod CTRL, j,	resize d,	resizeactive,	0 40		"
+        "$mod CTRL, k, 	resize u,	resizeactive,	0 -40		"
+        "$mod CTRL, h,	resize l,	resizeactive,	-40 0		"
+        "$mod CTRL, l,	resize r,	resizeactive,	40 0		"
+
+        "$mod SHIFT,	j,	move d,		movewindow,	d		"
+        "$mod SHIFT,	k,	move u,		movewindow,	u		"
+        "$mod SHIFT,	h,	move l,		movewindow,	l		"
+        "$mod SHIFT,	l,	move r,		movewindow,	r		"
+        
+        "$mod SHIFT,	1,	Move Window to,	movetoworkspace,1		"
+        "$mod SHIFT,	2,	Move Window to,	movetoworkspace,2		"
+        "$mod SHIFT,	3,	Move Window to,	movetoworkspace,3		"
+        "$mod SHIFT,	4,	Move Window to,	movetoworkspace,4		"
+        "$mod SHIFT,	5,	Move Window to,	movetoworkspace,5		"
+        "$mod SHIFT,	6,	Move Window to,	movetoworkspace,6		"
+        "$mod SHIFT,	7,	Move Window to,	movetoworkspace,7		"
+        "$mod SHIFT,	8,	Move Window to,	movetoworkspace,8		"
+        "$mod SHIFT,	9,	Move Window to,	movetoworkspace,9		"
+        "$mod SHIFT,	0,	Move Window to,	movetoworkspace,10		"
+
+        "$mod,	1,	goto WS,	workspace,	1		"
+        "$mod,	2,	goto WS,	workspace,	2		"
+        "$mod,	3,	goto WS,	workspace,	3		"
+        "$mod,	4,	goto WS,	workspace,	4		"
+        "$mod,	5,	goto WS,	workspace,	5		"
+        "$mod,	6,	goto WS,	workspace,	6		"
+        "$mod,	7,	goto WS,	workspace,	7		"
+        "$mod,	8,	goto WS,	workspace,	8		"
+        "$mod,	9,	goto WS,	workspace,	9		"
+        "$mod,	0,	goto WS,	workspace,	10		"
+
+        "$mod,	TAB,	Next Workspace,	workspace,	e+1		"
+        "$mod SHIFT,	TAB,	Next Workspace,	workspace,	e-1		"
+        "$mod CTRL,	TAB,	Next Workspace,	workspace,	previous	"
+      ];
+    };
+  };
+}
