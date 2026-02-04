@@ -134,14 +134,11 @@
         "$mod,	V,	Floating, 	togglefloating,			"
         "$mod, 	F,	Force FS,	fullscreen,	0"
 
-<<<<<<< HEAD
         "$mod,	j,	go down, 	movefocus,	d		"
         "$mod,	k,	go up	, 	movefocus,	u		"
         "$mod,	h,	go left	,	movefocus,	l		"
         "$mod,	l,	go right,	movefocus,	r		"
 
-=======
->>>>>>> c1198787acfec1839a202f0d120c10886b3d367d
         "$mod CTRL, j,	resize d,	resizeactive,	0 40		"
         "$mod CTRL, k, 	resize u,	resizeactive,	0 -40		"
         "$mod CTRL, h,	resize l,	resizeactive,	-40 0		"
