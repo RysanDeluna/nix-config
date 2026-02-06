@@ -60,6 +60,7 @@
   };
   
   programs.hyprland.enable = true;
+  programs.zsh.enable = true;
 
   # Configure console keymap
   console.keyMap = "br-abnt2";
@@ -87,6 +88,7 @@
   # services.xserver.libinput.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
+  users.defaultUserShell = pkgs.zsh;
   users.users.ni = {
     isNormalUser = true;
     description = "ni";
