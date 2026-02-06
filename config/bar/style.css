@@ -130,6 +130,11 @@ window#waybar.empty #window {
   min-height: 8px;
 }
 
+#tray {
+    margin-right: 4px;
+    padding: 4px;
+}
+
 #hardware {
   margin: 0px 2px 0px 4px;
 }

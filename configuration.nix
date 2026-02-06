@@ -94,9 +94,9 @@
     description = "ni";
     extraGroups = [ "networkmanager" "wheel" ];
     packages = with pkgs; [
-    #  thunderbird
-	firefox
-	neofetch
+      firefox
+      neofetch
+      networkmanagerapplet
     ];
   };
 
@@ -110,7 +110,7 @@
     xclip
     unzip
     libnotify
-    python3 
+    python3
   ];
 
   # https://wiki.nixos.org/wiki/Fonts

@@ -81,7 +81,7 @@
         "waypaper --restore"
         "waybar"
         "mako"
-        "foot"
+        "nm-applet --indicator"
       ];
 
       monitor = "Virtual-1,1440x900@59,0x0,1";

@@ -47,6 +47,7 @@ in
     swww = { 
       enable=true; 
     };
+    network-manager-applet.enable = true;
   };
 
 
@@ -119,7 +120,7 @@ in
 
           modules-left = [ "custom/text" "hyprland/workspaces" "hyprland/window" ];
           modules-center = [ "clock" ];
-          modules-right = [ "group/audio" "network" "privacy" "backlight/slider" 
+          modules-right = [ "group/audio" "tray" "network" "privacy" "backlight/slider" 
                             "group/hardware" "group/power-group"];
 
           # GROUPS -------------------------------------------
@@ -225,6 +226,7 @@ in
             format-disconnected =  "";
             tooltip-format-disconnected = "Disconnected";
             interval = 2;
+            on-click = "nm-connection-editor";
           };
 
           pulseaudio = {
