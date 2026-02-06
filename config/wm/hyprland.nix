@@ -175,6 +175,11 @@
         "$mod SHIFT,	TAB,	Next Workspace,	workspace,	e-1		"
         "$mod CTRL,	TAB,	Next Workspace,	workspace,	previous	"
       ];
+
+      windowrule = [
+        "float, class:nm-connection-editor"
+        "move 100%-w-20 5% , class:nm-connection-editor"
+      ];
     };
   };
 }
