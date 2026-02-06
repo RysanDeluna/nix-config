@@ -106,10 +106,11 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-   	vim		# EDITOR  
-        xclip		# 
-        unzip
-	libnotify	# TEST NOTIFICATIONS
+    vim
+    xclip
+    unzip
+    libnotify
+    python3 
   ];
 
   # https://wiki.nixos.org/wiki/Fonts
