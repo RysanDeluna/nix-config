@@ -91,7 +91,14 @@ in
 
     ripgrep.enable = true;
     fd.enable = true;
-    foot.enable = true;
+    foot = {
+      enable = true;
+      settings = {
+        main = {
+          font = "monospace:size=16";
+        };
+      };  
+    };
     wofi.enable = true;
     eww.enable = true;
     neovim = customNeovim pkgs;
