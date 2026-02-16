@@ -84,7 +84,7 @@
         "nm-applet --indicator"
       ];
 
-      monitor = "Virtual-1,1440x900@59,0x0,1";
+      monitor = "eDP-1,1920x1080@120,0x0,1";
       env = [
         "GDK_BACKEND,wayland,x11,*"
         "QT_STYLE_OVERRIDE,kvantum"

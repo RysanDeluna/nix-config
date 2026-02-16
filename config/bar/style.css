@@ -89,20 +89,16 @@ window#waybar.empty #window {
   margin: 0px 4px 0px 4px;
 }
 
-#pulseaudio{
+#pulseaudio,
+#backlight{
   font-size: 16px;
   font-weight: normal;
-  color: #6F8FDB;
   opacity: 1;
   margin-right: 2px;
 }
 
-#network{
-  font-size: 18px;
-  color: #A1BDCE;
-  font-weight: normal;
-  margin: 0px 4px 0px 4px; 
-  padding-right: 4px;
+#pulseaudio{
+  color: #6F8FDB;
 }
 
 #pulseaudio-slider {
@@ -130,6 +126,42 @@ window#waybar.empty #window {
   min-height: 8px;
 }
 
+#backlight{
+  color: #EBCB8B;
+  padding-right: 4px;
+  margin: 0px 4px;
+}
+
+#backlight-slider {
+  margin-left: 2px;
+  margin-right: 0px;
+}
+#backlight-slider slider {
+  background: #A1BDCE;
+  box-shadow: none;
+  background-image: none;
+  background: transparent;
+}
+#backlight-slider trough {
+  border-radius: 8px;
+  min-height: 8px;
+  min-width: 100px;
+  background: shade(@theme_base_color, 0.6);
+}
+#backlight-slider highlight {
+  border-radius: 8px;
+  background-color: #EBCB8B;
+  min-width: 0px;
+  min-height: 8px;
+}
+
+#network{
+  font-size: 18px;
+  color: #A1BDCE;
+  font-weight: normal;
+  margin: 0px 0px 0px 4px; 
+}
+
 #tray {
     margin-right: 4px;
     padding: 4px;
@@ -152,4 +184,16 @@ window#waybar.empty #window {
 #memory{
   font-weight: normal;
   color: #E4C9AF;
+}
+
+#temperature {
+  font-size: 17px;
+  padding: 4px;
+  color: #8FBCBB;
+}
+#temperature.warning {
+  color: #EBCB8B;
+}
+#temperature.critical {
+  color: #BF616A;
 }

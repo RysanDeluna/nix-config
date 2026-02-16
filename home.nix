@@ -110,7 +110,7 @@ in
       settings = {
         crazy-main-bar = {
           layer = "top";
-          output = [ "Virtual-1" ];
+          output = [ "eDP-1" ];
           position = "top"; 
           height = 30;
           # width = ; 
@@ -120,7 +120,7 @@ in
 
           modules-left = [ "custom/text" "hyprland/workspaces" "hyprland/window" ];
           modules-center = [ "clock" ];
-          modules-right = [ "group/audio" "tray" "network" "privacy" "backlight/slider" 
+          modules-right = [ "group/audio" "group/backlight" "tray" "network" "privacy"  
                             "group/hardware" "group/power-group"];
 
           # GROUPS -------------------------------------------
@@ -159,6 +159,17 @@ in
             };
 	      };
 
+          "group/backlight" = {
+            orientation = "horizontal";
+            modules = ["backlight" "backlight/slider"];
+            drawer = {
+              transition-durantion = 600;
+              children-class = "drawer-3";
+              transition-to-left = true;
+              click-to-reveal = true;
+            };
+          };
+
           # MODULES CONFIG ----------------------------------- 
           "custom/quit" = {
             format = "󰗼"; tooltip = false; on-click = "hyprctl dispatch exit"; 
@@ -186,7 +197,7 @@ in
           };
 
           temperature = {
-            interval  = 1; critical-threshold = 85; 
+            interval  = 1; critical-threshold = 70; 
             format = "{icon}";
             format-icons = ["" "" "" "" ""];
           };
@@ -209,11 +220,6 @@ in
             icon   = false;
             icon-size = 24;
             separate-outputs = true;
-            rewrite = {  # FIXME
-              "(.*)Mozilla Firefox" = "󰯊 $1";
-              "vim (.*)" = " $1";
-              "foot (.*)" = " $1";
-            };
           };
 
           network = {
@@ -229,6 +235,10 @@ in
             on-click = "nm-connection-editor";
           };
 
+          backlight = {
+            format = "{icon}";
+            format-icons = [""];
+          };
           pulseaudio = {
             format = "{icon}";
             rotate = 0; 

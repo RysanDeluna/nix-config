@@ -92,7 +92,7 @@
   users.users.ni = {
     isNormalUser = true;
     description = "ni";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "sudo" ];
     packages = with pkgs; [
       firefox
       neofetch
