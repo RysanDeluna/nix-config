@@ -43,6 +43,7 @@
   };
 
   services = {
+    gvfs.enable = true;
     displayManager = {
       ly = {
          enable = true;
