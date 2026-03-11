@@ -3,6 +3,7 @@ let
   customNeovim = import ./config/nvim/nvim.nix;
 in
 {
+  
   imports = [
     ./config/terminal
     ./config/wm
@@ -10,7 +11,7 @@ in
   home = {
     username = "ni";
     homeDirectory = "/home/ni";
-    stateVersion = "25.05";
+    stateVersion = "25.11";
     sessionVariables = {
       EDITOR = "nvim";
       NVIM_CONFIG_DIR = "${config.home.homeDirectory}/.dotfiles/config/nvim";
@@ -105,9 +106,9 @@ in
 
     git = {
       enable = true;
-      userName = "RysanDeluna";
-      userEmail = "ry.marco.andrade@gmail.com";
-      extraConfig = {
+      settings = {
+        user.name = "RysanDeluna";
+        user.email = "ry.marco.andrade@gmail.com";
 	    init.DefaultBranch = "main";
       };
     };
@@ -295,5 +296,8 @@ in
         };
       };
     };
+
+    #discord.enable = true;
+    spotify-player.enable = true;
   };
 }
