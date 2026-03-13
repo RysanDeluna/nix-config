@@ -66,6 +66,8 @@ in
 
   services = {
     mako.enable = true;
+    clipse.enable = true;
+    udiskie.enable = true;
     swww = { 
       enable=true; 
     };
@@ -302,5 +304,6 @@ in
     };
 
     discord.enable = true;
+    obsidian.enable = true;
   };
 }

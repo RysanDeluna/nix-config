@@ -1,5 +1,8 @@
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 {
+  home.packages = [ 
+    pkgs.hyprpicker 
+  ];
   wayland.windowManager.hyprland = {
     enable = true;
     package = null;
@@ -41,20 +44,20 @@
         ];
         animation = [
           # Name	  # on  # speed # curve         # etc
-          "global,      1,  10,     default				"
-          "border, 		1, 	5.39, 	easeOutQuint			"
-          "windows, 		1, 	4.79, 	easeOutQuint			"
-          "windowsIn, 	1, 	4.1, 	easeOutQuint,	popin 87%	" 
-          "windowsOut,	1, 	1.49,	linear, 	popin 87%	" 
-          "fadeIn, 		1, 	1.73,	almostLinear			"
-          "fadeOut, 		1, 	1.46,	almostLinear			"
-          "fade, 		1, 	3.03,	quick				"
-          "layers, 		1, 	3.81,	easeOutQuint			"
-          "layersIn, 		1, 	4, 	easeOutQuint, 	fade		"
-          "layersOut, 	1, 	1.5, 	linear, 	fade		"
-          "fadeLayersIn, 	1, 	1.79, 	almostLinear			"
-          "fadeLayersOut, 	1, 	1.39, 	almostLinear			"
-          "workspaces,	0,	0,	ease				"
+          "global,      1,      10,     default"
+          "border,      1,    5.39,     easeOutQuint"
+          "windows,     1,    4.79,     easeOutQuint"
+          "windowsIn,   1,     4.1,     easeOutQuint, popin 87%" 
+          "windowsOut,  1,    1.49,     linear,       popin 87%" 
+          "fadeIn,      1,    1.73,     almostLinear"
+          "fadeOut,     1,    1.46,     almostLinear"
+          "fade,        1,    3.03,     quick"
+          "layers,      1,    3.81,     easeOutQuint"
+          "layersIn,    1,       4,     easeOutQuint, fade"
+          "layersOut,   1,     1.5,     linear,       fade"
+          "fadeLayersIn,1,    1.79,     almostLinear"
+          "fadeLayersOut,1,   1.39,     almostLinear"
+          "workspaces,  1,      2,     quick"
         ];
       };
 
@@ -73,15 +76,18 @@
       };
 
       "$terminal" = "foot";
+      "$launch_with_class"="foot -a";
       "$fileManager" = "nautilus --new-window";
       "$menu" = "wofi --show drun";
       "$mod" = "SUPER";
 
       exec-once = [
+        "udiskie"
         "waypaper --restore"
         "waybar"
         "mako"
         "nm-applet --indicator"
+        "clipse -listen"
       ];
 
       monitor = "eDP-1,1920x1080@120,0x0,1.2";
@@ -122,32 +128,35 @@
         "$mod, mouse:273, Resize Window, resizewindow"
       ];
 
-      bindd = [ # MODs,	KEY,	DESCR		DISPATCHER,	params "$mod,	W,	Close active,	killactive			" "$mod,	M,	Exit,		exit				" "$mod,	A,	Files,		exec,		$fileManager	" "$mod,	F11,	Fullscreen,	fullscreen,	1		" "$mod,	RETURN,	Terminal,	exec,		$terminal	" "$mod,	P,	dmenu	,	exec,		$menu		" "$mod,	V,	Floating, 	togglefloating,			" "$mod, 	F,	Force FS,	fullscreen,	0" "$mod,	j,	go down, 	movefocus,	d		" "$mod,	k,	go up	, 	movefocus,	u		" "$mod,	h,	go left	,	movefocus,	l		" "$mod,	l,	go right,	movefocus,	r		"
-          # MODs,	KEY,	DESCR		DISPATCHER,	params
-        "$mod,	W,	Close active,	killactive			"
-        "$mod,	M,	Exit,		exit				"
-        "$mod,	A,	Files,		exec,		$fileManager	"
-        "$mod,	F11,	Fullscreen,	fullscreen,	1		"
-        "$mod,	RETURN,	Terminal,	exec,		$terminal	"
-        "$mod,	P,	dmenu	,	exec,		$menu		"
+      bindrd = [
+        "$mod CTRL, j,  resize d, resizeactive, 0 40"
+        "$mod CTRL, k,  resize u, resizeactive, 0 -40"
+        "$mod CTRL, h,  resize l, resizeactive, -40 0"
+        "$mod CTRL, l,  resize r, resizeactive, 40 0"
 
-        "$mod,	V,	Floating, 	togglefloating,			"
-        "$mod, 	F,	Force FS,	fullscreen,	0"
+        "ALT, TAB, Cycle windows, cyclenext, "
+      ];
+      bindd = [
+        # MODs, KEY,    DESCR   DISPATCHER, params
+        "$mod,  W,      Close active, killactive"
+        "$mod,  Q,      Exit,         exit"
+        "$mod,  RETURN, Terminal,     exec,$terminal"
+        "$mod,  P,      dmenu,        exec,$menu"
+        "$mod,  V,      Clipboard history,  exec, $launch_with_class clipse -e 'clipse'"
 
-        "$mod,	j,	go down, 	movefocus,	d		"
-        "$mod,	k,	go up	, 	movefocus,	u		"
-        "$mod,	h,	go left	,	movefocus,	l		"
-        "$mod,	l,	go right,	movefocus,	r		"
+        "$mod,  T,      Floating,   togglefloating,"
+        "$mod,  KP_Add, Fullscreen, fullscreen,1"
+        "$mod,  F11,    Ultra FS,   fullscreen,0"
 
-        "$mod CTRL, j,	resize d,	resizeactive,	0 40		"
-        "$mod CTRL, k, 	resize u,	resizeactive,	0 -40		"
-        "$mod CTRL, h,	resize l,	resizeactive,	-40 0		"
-        "$mod CTRL, l,	resize r,	resizeactive,	40 0		"
+        "$mod,  j,      go down,    movefocus,d"
+        "$mod,  k,      go up,      movefocus,u"
+        "$mod,  h,      go left,    movefocus,l"
+        "$mod,  l,      go right,   movefocus,r"
 
-        "$mod SHIFT,	j,	move d,		movewindow,	d		"
-        "$mod SHIFT,	k,	move u,		movewindow,	u		"
-        "$mod SHIFT,	h,	move l,		movewindow,	l		"
-        "$mod SHIFT,	l,	move r,		movewindow,	r		"
+        "$mod SHIFT,  j,  move d, movewindow,d"
+        "$mod SHIFT,  k,  move u, movewindow,u"
+        "$mod SHIFT,  h,  move l, movewindow,l"
+        "$mod SHIFT,  l,  move r, movewindow,r"
         
         "$mod SHIFT,	1,	Move Window to,	movetoworkspace,1		"
         "$mod SHIFT,	2,	Move Window to,	movetoworkspace,2		"
@@ -171,14 +180,17 @@
         "$mod,	9,	goto WS,	workspace,	9		"
         "$mod,	0,	goto WS,	workspace,	10		"
 
-        "$mod,	TAB,	Next Workspace,	workspace,	e+1		"
-        "$mod SHIFT,	TAB,	Next Workspace,	workspace,	e-1		"
-        "$mod CTRL,	TAB,	Next Workspace,	workspace,	previous	"
+        "$mod,TAB,Next Workspace,workspace,previous"
       ];
 
       windowrule = [
+        # Network manager
         "float, class:nm-connection-editor"
         "move 100%-w-20 5% , class:nm-connection-editor"
+
+        # Clipse
+        "float, class:clipse"
+        "size 60% 40%, class:clipse"
       ];
     };
   };
