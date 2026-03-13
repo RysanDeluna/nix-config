@@ -132,6 +132,9 @@ in
                             "group/hardware" "battery" "group/power-group"];
 
           # GROUPS -------------------------------------------
+          tray = {
+            spacing = 10;
+          };
 
           "group/hardware" = {
             orientation = "horizontal";

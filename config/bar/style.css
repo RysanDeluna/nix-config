@@ -191,11 +191,19 @@ window#waybar.empty #window {
   padding: 4px;
   color: #8FBCBB;
 }
-#temperature.warning {
+#temperature.warning, #battery.warning {
+  background: @theme_base_color;
   color: #EBCB8B;
 }
-#temperature.critical {
+#temperature.critical, #battery.critical {
+  background: @theme_base_color;
   color: #BF616A;
+}
+#battery {
+    padding-right: 8px;
+    margin-left: 4px;
+    margin-right: 4px;
+    color: #8FBCBB;
 }
 #battery {
     padding-right: 8px;
