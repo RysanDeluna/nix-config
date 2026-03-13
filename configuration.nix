@@ -42,23 +42,6 @@
     LC_TIME = "pt_BR.UTF-8";
   };
 
-  services = {
-    gvfs.enable = true;
-    displayManager = {
-      ly = {
-         enable = true;
-      };
-    };
-    xserver = {
-      enable = true;
-      #desktopManager.gnome.enable = true;
-      excludePackages = with pkgs; [ xterm ];
-      xkb = {
-        layout = "br";
-        variant = "";
-      };
-    };
-  };
   
   programs.hyprland.enable = true;
   programs.zsh.enable = true;
@@ -77,16 +60,11 @@
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;
-    # If you want to use JACK applications, uncomment this
-    #jack.enable = true;
-
-    # use the example session manager (no others are packaged yet so this is enabled by default,
-    # no need to redefine it in your config for now)
-    #media-session.enable = true;
+    jack.enable = true;
+    wireplumber.enable = true;
   };
-
-  # Enable touchpad support (enabled default in most desktopManager).
-  # services.xserver.libinput.enable = true;
+  systemd.user.services.pipewire.wantedBy = [ "graphical-session.target" ];
+  systemd.user.services.pipewire-pulse.wantedBy = [ "graphical-session.target" ];
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.defaultUserShell = pkgs.zsh;
@@ -133,10 +111,35 @@
     enableSSHSupport = true;
   };
 
-  # List services that you want to enable:
+  services = {
+    openssh.enable = true;
+    blueman.enable = true;
+    gvfs.enable = true;
+    displayManager = {
+      ly = {
+         enable = true;
+      };
+    };
+    xserver = {
+      enable = true;
+      libinput.enable = true;
+      excludePackages = with pkgs; [ xterm ];
+      xkb = {
+        layout = "br";
+        variant = "";
+      };
+    };
+  };
 
-  # Enable the OpenSSH daemon.
-  services.openssh.enable = true;
+  hardware.bluetooth = {
+    enable = true;
+  };
+
+  security.polkit.enable = true;
+  services.dbus.enable = true;
+  security.pam.services = {
+    login.enableKwallet = true;
+  };
 
   # Open ports in the firewall.
   networking.firewall.allowedTCPPorts = [ 22 ];
