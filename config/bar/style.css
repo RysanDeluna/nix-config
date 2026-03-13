@@ -197,3 +197,9 @@ window#waybar.empty #window {
 #temperature.critical {
   color: #BF616A;
 }
+#battery {
+    padding-right: 8px;
+    margin-left: 4px;
+    margin-right: 4px;
+    color: #8FBCBB;
+}

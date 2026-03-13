@@ -129,7 +129,7 @@ in
           modules-left = [ "custom/text" "hyprland/workspaces" "hyprland/window" ];
           modules-center = [ "clock" ];
           modules-right = [ "group/audio" "group/backlight" "tray" "network" "privacy"  
-                            "group/hardware" "group/power-group"];
+                            "group/hardware" "battery" "group/power-group"];
 
           # GROUPS -------------------------------------------
 
@@ -144,6 +144,19 @@ in
               transition-left-to-right = true;
               click-to-reveal = true;
             };
+          };
+
+          battery = {
+            interval = 30;
+            states = {
+              warning = 30;
+              critical = 15;
+            };
+            format = "{capacity}% {icon}";
+            format-icons = {
+              default = [ "" "" "" "" "" ];
+            };
+            max-length = 25;
           };
 
           "group/power-group" = {
