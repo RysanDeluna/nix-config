@@ -2,7 +2,7 @@
 let
   customNeovim = import ./config/nvim/nvim.nix;
 in
-{ 
+{
   nixpkgs.config.allowUnfree = true;
 
   imports = [
@@ -19,7 +19,8 @@ in
     };
     file = {
       # mutable files, edit the config and doesnt need to rebuild
-      ".config/waybar/style.css".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/config/bar/style.css";
+      ".config/waybar/style.css".source =
+        config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/config/bar/style.css";
     };
 
     pointerCursor = {
@@ -33,13 +34,13 @@ in
     packages = [
       pkgs.tree
       pkgs.hello
-      pkgs.nordic            # theme
-      pkgs.rose-pine-cursor  # Cursor pack
-      pkgs.waypaper          # Wallpaper
-      pkgs.swww              # Wallpaper
-      pkgs.dconf-editor      # GTK editor
-      pkgs.nwg-look          # theming
-      pkgs.nautilus          # file manager
+      pkgs.nordic # theme
+      pkgs.rose-pine-cursor # Cursor pack
+      pkgs.waypaper # Wallpaper
+      pkgs.swww # Wallpaper
+      pkgs.dconf-editor # GTK editor
+      pkgs.nwg-look # theming
+      pkgs.nautilus # file manager
 
       # LSPs
       pkgs.nixd
@@ -68,12 +69,11 @@ in
     mako.enable = true;
     clipse.enable = true;
     udiskie.enable = true;
-    swww = { 
-      enable=true; 
+    swww = {
+      enable = true;
     };
     network-manager-applet.enable = true;
   };
-
 
   # The home.packages option allows you to install Nix packages into your
   # environment.
@@ -88,7 +88,7 @@ in
         main = {
           font = "monospace:size=16";
         };
-      };  
+      };
     };
     wofi.enable = true;
     eww.enable = true;
@@ -99,7 +99,7 @@ in
       settings = {
         user.name = "RysanDeluna";
         user.email = "ry.marco.andrade@gmail.com";
-	    init.DefaultBranch = "main";
+        init.DefaultBranch = "main";
       };
     };
 
@@ -109,17 +109,29 @@ in
         crazy-main-bar = {
           layer = "top";
           output = [ "eDP-1" ];
-          position = "top"; 
+          position = "top";
           height = 30;
-          # width = ; 
+          # width = ;
           reload_style_on_change = true;
 
           # ORGANISATION -------------------------------------
 
-          modules-left = [ "custom/text" "hyprland/workspaces" "hyprland/window" ];
+          modules-left = [
+            "custom/text"
+            "hyprland/workspaces"
+            "hyprland/window"
+          ];
           modules-center = [ "clock" ];
-          modules-right = [ "group/audio" "group/backlight" "tray" "network" "privacy"  
-                            "group/hardware" "battery" "group/power-group"];
+          modules-right = [
+            "group/audio"
+            "group/backlight"
+            "tray"
+            "network"
+            "privacy"
+            "group/hardware"
+            "battery"
+            "group/power-group"
+          ];
 
           # GROUPS -------------------------------------------
           tray = {
@@ -129,7 +141,9 @@ in
           "group/hardware" = {
             orientation = "horizontal";
             modules = [
-              "cpu" "memory" "temperature" 
+              "cpu"
+              "memory"
+              "temperature"
             ];
             drawer = {
               transition-durantion = 500;
@@ -147,35 +161,51 @@ in
             };
             format = "{capacity}% {icon}";
             format-icons = {
-              default = [ "" "" "" "" "" ];
+              default = [
+                ""
+                ""
+                ""
+                ""
+                ""
+              ];
             };
             max-length = 25;
           };
 
           "group/power-group" = {
             orientation = "horizontal";
-            modules = ["custom/power" "custom/quit" "custom/reboot" ];
+            modules = [
+              "custom/power"
+              "custom/quit"
+              "custom/reboot"
+            ];
             drawer = {
               transition-duration = 400;
-	          children-class = "not-power";
+              children-class = "not-power";
               transition-left-to-right = false;
             };
           };
 
           "group/audio" = {
             orientation = "horizontal";
-            modules = ["pulseaudio" "pulseaudio/slider"];
+            modules = [
+              "pulseaudio"
+              "pulseaudio/slider"
+            ];
             drawer = {
               transition-durantion = 600;
               children-class = "drawer-2";
               transition-to-left = true;
               click-to-reveal = true;
             };
-	      };
+          };
 
           "group/backlight" = {
             orientation = "horizontal";
-            modules = ["backlight" "backlight/slider"];
+            modules = [
+              "backlight"
+              "backlight/slider"
+            ];
             drawer = {
               transition-durantion = 600;
               children-class = "drawer-3";
@@ -184,39 +214,78 @@ in
             };
           };
 
-          # MODULES CONFIG ----------------------------------- 
+          # MODULES CONFIG -----------------------------------
           "custom/quit" = {
-            format = "󰗼"; tooltip = false; on-click = "hyprctl dispatch exit"; 
+            format = "󰗼";
+            tooltip = false;
+            on-click = "hyprctl dispatch exit";
           };
           #"custom/lock" = {
-              #  format = "󰍁"; tooltip = false; on-click = ""
+          #  format = "󰍁"; tooltip = false; on-click = ""
           #};
           "custom/reboot" = {
-                format = ""; tooltip = false; on-click = "reboot";
+            format = "";
+            tooltip = false;
+            on-click = "reboot";
           };
           "custom/power" = {
-                format = ""; tooltip = false; on-click = "shutdown now";
+            format = "";
+            tooltip = false;
+            on-click = "shutdown now";
           };
 
           memory = {
-            interval = 5; rotate = 0; format = "{icon}";
-            format-icons = ["󰝦" "󰪞" "󰪟" "󰪠" "󰪡" "󰪢" "󰪣" "󰪤" "󰪥"];
-            max-length = 10; 
+            interval = 5;
+            rotate = 0;
+            format = "{icon}";
+            format-icons = [
+              "󰝦"
+              "󰪞"
+              "󰪟"
+              "󰪠"
+              "󰪡"
+              "󰪢"
+              "󰪣"
+              "󰪤"
+              "󰪥"
+            ];
+            max-length = 10;
           };
 
           cpu = {
-            interval = 5; rotate = 0; format = "{icon}";
-            format-icons = ["󰝦" "󰪞" "󰪟" "󰪠" "󰪡" "󰪢" "󰪣" "󰪤" "󰪥"];
-            max-length = 10; 
+            interval = 5;
+            rotate = 0;
+            format = "{icon}";
+            format-icons = [
+              "󰝦"
+              "󰪞"
+              "󰪟"
+              "󰪠"
+              "󰪡"
+              "󰪢"
+              "󰪣"
+              "󰪤"
+              "󰪥"
+            ];
+            max-length = 10;
           };
 
           temperature = {
-            interval  = 1; critical-threshold = 70; 
+            interval = 1;
+            critical-threshold = 70;
             format = "{icon}";
-            format-icons = ["" "" "" "" ""];
+            format-icons = [
+              ""
+              ""
+              ""
+              ""
+              ""
+            ];
           };
 
-	      "custom/text" = { format = "  Hey there, Samurai.;"; };
+          "custom/text" = {
+            format = "  Hey there, Samurai.;";
+          };
 
           "hyprland/workspaces" = {
             format = "{icon}";
@@ -225,25 +294,31 @@ in
               active = "";
               default = "";
             };
-            persistent-workspaces = { "*" = 5; };
+            persistent-workspaces = {
+              "*" = 5;
+            };
           };
 
           "hyprland/window" = {
             format = "<span  weight='bold' >{class}</span>";
             max-length = 120;
-            icon   = false;
+            icon = false;
             icon-size = 24;
             separate-outputs = true;
           };
 
           network = {
-            tooltip = true; 
-            format-wifi = "{icon} "; 
-            format-icons = ["󰤟" "󰤢" "󰤥"];
-            format-ethernet= "󰈀";
+            tooltip = true;
+            format-wifi = "{icon} ";
+            format-icons = [
+              "󰤟"
+              "󰤢"
+              "󰤥"
+            ];
+            format-ethernet = "󰈀";
             tooltip-format = "Network: <big><b>{essid}</b></big>\nSignal strength: <b>{signaldBm}dBm ({signalStrength}%)</b>\nFrequency: <b>{frequency}MHz</b>\nInterface: <b>{ifname}</b>\nIP: <b>{ipaddr}/{cidr}</b>\nGateway: <b>{gwaddr}</b>\nNetmask: <b>{netmask}</b>";
             format-linked = "󰈀 {ifname} (No IP)";
-            format-disconnected =  "";
+            format-disconnected = "";
             tooltip-format-disconnected = "Disconnected";
             interval = 2;
             on-click = "nm-connection-editor";
@@ -251,27 +326,32 @@ in
 
           backlight = {
             format = "{icon}";
-            format-icons = [""];
+            format-icons = [ "" ];
           };
           pulseaudio = {
             format = "{icon}";
-            rotate = 0; 
+            rotate = 0;
             format-muted = "婢";
             tooltip-format = "{icon} {desc} // {volume}%";
             scroll-step = 5;
             format-icons = {
-              default =  [" " " " " "];
+              default = [
+                " "
+                " "
+                " "
+              ];
               headphone = "";
-              hands-free =  "";
+              hands-free = "";
               headset = "";
               phone = "";
-              portable =  "";
+              portable = "";
               car = "";
             };
           };
-          "pulseaudio/slider"  = {
-            min = 0; max = 100;
-            rotate = 0; 
+          "pulseaudio/slider" = {
+            min = 0;
+            max = 100;
+            rotate = 0;
             device = "pulseaudio";
             scroll-step = 1;
           };
@@ -281,22 +361,22 @@ in
             interval = 60;
             timezone = "America/Sao_Paulo";
 
-            tooltip-format = "<tt><small>{calendar}</small></tt>";   
+            tooltip-format = "<tt><small>{calendar}</small></tt>";
             calendar = {
               mode = "month";
               mode-mon-col = 4;
               format = {
-                months=     "<span color='#ffead3'><b>{}</b></span>";
-                days=       "<span color='#ecc6d9'><b>{}</b></span>";
-                weeks=      "<span color='#99ffdd'><b>W{}</b></span>";
-                weekdays=   "<span color='#ffcc66'><b>{}</b></span>";
-                today=      "<span color='#ff6699'><b><u>{}</u></b></span>";
+                months = "<span color='#ffead3'><b>{}</b></span>";
+                days = "<span color='#ecc6d9'><b>{}</b></span>";
+                weeks = "<span color='#99ffdd'><b>W{}</b></span>";
+                weekdays = "<span color='#ffcc66'><b>{}</b></span>";
+                today = "<span color='#ff6699'><b><u>{}</u></b></span>";
               };
             };
             actions = {
               on-click-right = "mode";
               on-scroll-up = "shift_down";
-              on-scroll-down="shift_up";
+              on-scroll-down = "shift_up";
             };
           };
         };

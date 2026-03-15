@@ -1,34 +1,36 @@
 { pkgs, ... }:
 {
-  home.packages = [ 
-    pkgs.hyprpicker 
+  home.packages = [
+    pkgs.hyprpicker
   ];
   wayland.windowManager.hyprland = {
     enable = true;
     package = null;
     portalPackage = null;
-    systemd.variables = ["--all"];
+    systemd.variables = [ "--all" ];
     settings = {
       general = {
-        gaps_in = 2;
-        gaps_out = 6;
-        border_size = 2; 
+        border_size = 2;
+        gaps_in = 1;
+        gaps_out = 4;
 
-        "col.active_border" = "rgba(33ccffee) rgba(00ff99ee) 60deg";
-        "col.inactive_border" = "rgba(595959aa)";
+        float_gaps = 4;
+
+        "col.active_border" = "rgb(D8DEE9)";
+        "col.inactive_border" = "rgb(2e3440)";
 
         resize_on_border = false;
         layout = "dwindle";
       };
 
       decoration = {
-        rounding = 0; 
+        rounding = 0;
         active_opacity = 1.0;
-        inactive_opacity = 0.98; 
-        shadow = { 
+        inactive_opacity = 0.98;
+        shadow = {
           enabled = false;
         };
-        blur = { 
+        blur = {
           enabled = false;
         };
       };
@@ -47,8 +49,8 @@
           "global,      1,      10,     default"
           "border,      1,    5.39,     easeOutQuint"
           "windows,     1,    4.79,     easeOutQuint"
-          "windowsIn,   1,     4.1,     easeOutQuint, popin 87%" 
-          "windowsOut,  1,    1.49,     linear,       popin 87%" 
+          "windowsIn,   1,     4.1,     easeOutQuint, popin 87%"
+          "windowsOut,  1,    1.49,     linear,       popin 87%"
           "fadeIn,      1,    1.73,     almostLinear"
           "fadeOut,     1,    1.46,     almostLinear"
           "fade,        1,    3.03,     quick"
@@ -64,7 +66,7 @@
       dwindle = {
         pseudotile = true;
         preserve_split = true;
-        force_split = 2; 
+        force_split = 2;
       };
 
       master.new_status = "master";
@@ -72,11 +74,11 @@
       misc = {
         disable_hyprland_logo = true;
         disable_splash_rendering = true;
-        focus_on_activate = true; 
+        focus_on_activate = true;
       };
 
       "$terminal" = "foot";
-      "$launch_with_class"="foot -a";
+      "$launch_with_class" = "foot -a";
       "$fileManager" = "nautilus --new-window";
       "$menu" = "wofi --show drun";
       "$mod" = "SUPER";
@@ -111,13 +113,15 @@
         # keyboard ---------
         kb_layout = "br";
 
-        # mouse ------------ 
+        # mouse ------------
         follow_mouse = 2;
         sensitivity = 0;
-        touchpad = { natural_scroll = true; };
+        touchpad = {
+          natural_scroll = true;
+        };
       };
 
-      cursor = { 
+      cursor = {
         enable_hyprcursor = false;
         inactive_timeout = 10;
         no_warps = true;
@@ -128,7 +132,7 @@
         "$mod, mouse:273, Resize Window, resizewindow"
       ];
 
-      bindrd = [
+      binded = [
         "$mod CTRL, j,  resize d, resizeactive, 0 40"
         "$mod CTRL, k,  resize u, resizeactive, 0 -40"
         "$mod CTRL, h,  resize l, resizeactive, -40 0"
@@ -157,7 +161,7 @@
         "$mod SHIFT,  k,  move u, movewindow,u"
         "$mod SHIFT,  h,  move l, movewindow,l"
         "$mod SHIFT,  l,  move r, movewindow,r"
-        
+
         "$mod SHIFT,	1,	Move Window to,	movetoworkspace,1		"
         "$mod SHIFT,	2,	Move Window to,	movetoworkspace,2		"
         "$mod SHIFT,	3,	Move Window to,	movetoworkspace,3		"
