@@ -17,6 +17,9 @@ in
       EDITOR = "nvim";
       NVIM_CONFIG_DIR = "${config.home.homeDirectory}/.dotfiles/config/nvim";
     };
+    sessionPath = [
+      "${config.home.homeDirectory}/.dotfiles/scripts"
+    ];
     file = {
       # mutable files, edit the config and doesnt need to rebuild
       ".config/waybar/style.css".source =
@@ -49,6 +52,7 @@ in
       # Utils
       pkgs.wl-clipboard
       pkgs.gcc
+      pkgs.jtbl
     ];
   };
 
@@ -68,6 +72,7 @@ in
   services = {
     mako.enable = true;
     clipse.enable = true;
+    flameshot.enable = true;
     udiskie.enable = true;
     swww = {
       enable = true;
@@ -80,16 +85,21 @@ in
   programs = {
     home-manager.enable = true;
 
-    ripgrep.enable = true;
-    fd.enable = true;
+    # CLI
     foot = {
       enable = true;
       settings = {
         main = {
-          font = "monospace:size=16";
+          font = "monospace:size=14";
         };
       };
     };
+    ripgrep.enable = true;
+    fd.enable = true;
+    btop.enable = true;
+    fzf.enable = true;
+    jq.enable = true;
+
     wofi.enable = true;
     eww.enable = true;
     neovim = customNeovim pkgs;

@@ -147,6 +147,7 @@
         "$mod,  RETURN, Terminal,     exec,$terminal"
         "$mod,  P,      dmenu,        exec,$menu"
         "$mod,  V,      Clipboard history,  exec, $launch_with_class clipse -e 'clipse'"
+        "$mod,  F1,     HELP,         exec, $launch_with_class help_window -e 'kbhelper.sh'"
 
         "$mod,  T,      Floating,   togglefloating,"
         "$mod,  KP_Add, Fullscreen, fullscreen,1"
@@ -194,7 +195,11 @@
 
         # Clipse
         "float, class:clipse"
-        "size 60% 40%, class:clipse"
+        "size 70% 70%, class:clipse"
+
+        # Help Keyboard
+        "float, class:help_window"
+        "size 70% 70%, class:help_window"
       ];
     };
   };
