@@ -193,6 +193,11 @@
         "float, class:nm-connection-editor"
         "move 100%-w-20 5% , class:nm-connection-editor"
 
+        # Pwvucontrol
+        "float, class:com.saivert.pwvucontrol"
+        "size 1079 350, class:com.saivert.pwvucontrol"
+        "move 514 39, class:com.saivert.pwvucontrol"
+
         # Clipse
         "float, class:clipse"
         "size 70% 70%, class:clipse"

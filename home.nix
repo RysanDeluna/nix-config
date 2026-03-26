@@ -44,6 +44,7 @@ in
       pkgs.dconf-editor # GTK editor
       pkgs.nwg-look # theming
       pkgs.nautilus # file manager
+      pkgs.pwvucontrol
 
       # LSPs
       pkgs.nixd
@@ -63,6 +64,10 @@ in
 
   gtk = {
     enable = true;
+    iconTheme = {
+      package = pkgs.nordzy-icon-theme;
+      name = "Nordzy-cyan-dark";
+    };
     theme = {
       name = "Nordic";
       package = null;
@@ -206,7 +211,7 @@ in
               transition-durantion = 600;
               children-class = "drawer-2";
               transition-to-left = true;
-              click-to-reveal = true;
+              start-expanded = true;
             };
           };
 
@@ -220,7 +225,7 @@ in
               transition-durantion = 600;
               children-class = "drawer-3";
               transition-to-left = true;
-              click-to-reveal = true;
+              start-expanded = true;
             };
           };
 
@@ -338,10 +343,15 @@ in
             format = "{icon}";
             format-icons = [ "" ];
           };
+          "backlight/slider" = {
+            min = 10;
+            max = 100;
+          };
+
           pulseaudio = {
             format = "{icon}";
             rotate = 0;
-            format-muted = "婢";
+            format-muted = "󰝟";
             tooltip-format = "{icon} {desc} // {volume}%";
             scroll-step = 5;
             format-icons = {
@@ -357,12 +367,12 @@ in
               portable = "";
               car = "";
             };
+            on-click-right = "pwvucontrol";
           };
           "pulseaudio/slider" = {
             min = 0;
             max = 100;
             rotate = 0;
-            device = "pulseaudio";
             scroll-step = 1;
           };
 
