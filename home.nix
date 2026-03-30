@@ -286,6 +286,7 @@ in
           };
 
           temperature = {
+            thermal-zone = 2;
             interval = 1;
             critical-threshold = 70;
             format = "{icon}";
