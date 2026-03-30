@@ -13,10 +13,12 @@ pkgs: {
     # LSP
     lua-language-server
     nixd
+    pyright
 
     # format
     stylua
     nixfmt
+    black
 
     # Telescope
     ripgrep

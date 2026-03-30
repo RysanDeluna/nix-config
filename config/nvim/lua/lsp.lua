@@ -3,6 +3,7 @@
 local servers = {
 	"lua_ls",
 	"nixd",
+	"pyright",
 }
 
 -- Enabling all
@@ -14,6 +15,7 @@ vim.lsp.config("*", {
 for _, server in ipairs(servers) do
 	require("lsp." .. server)
 end
+
 vim.lsp.enable(servers)
 
 vim.api.nvim_create_autocmd("LspAttach", {
