@@ -2,13 +2,19 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, inputs, lib, ... }:
+{
+  config,
+  pkgs,
+  inputs,
+  lib,
+  ...
+}:
 
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-    ];
+  imports = [
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+  ];
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
@@ -42,7 +48,6 @@
     LC_TIME = "pt_BR.UTF-8";
   };
 
-  
   programs.hyprland.enable = true;
   programs.zsh.enable = true;
 
@@ -72,7 +77,11 @@
   users.users.ni = {
     isNormalUser = true;
     description = "ni";
-    extraGroups = [ "networkmanager" "wheel" "sudo" ];
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+      "sudo"
+    ];
     packages = with pkgs; [
       firefox
       neofetch
@@ -100,7 +109,7 @@
       serif = [ "NotoSerif Nerd Font" ];
       sansSerif = [ "NotoSans Nerd Font" ];
       monospace = [ "FiraMono Nerd Font" ];
-      emoji = [ "Noto Color Emoji" ]; 
+      emoji = [ "Noto Color Emoji" ];
     };
   };
 
@@ -118,7 +127,7 @@
     gvfs.enable = true;
     displayManager = {
       ly = {
-         enable = true;
+        enable = true;
       };
     };
     xserver = {
@@ -158,8 +167,11 @@
     automatic = true;
     options = "--delete-generations +5";
   };
-  nix.settings.auto-optimise-store = true; 
+  nix.settings.auto-optimise-store = true;
   system.stateVersion = "25.11"; # Did you read the comment?
 
-  nix.settings.experimental-features = [ "nix-command" "flakes" ]; 
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
 }

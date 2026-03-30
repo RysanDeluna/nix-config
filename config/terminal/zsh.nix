@@ -1,10 +1,10 @@
-{ config, pkgs, ...}:
+{ config, pkgs, ... }:
 let
   myAliases = {
     ll = "ls -l";
     ".." = "cd ..";
     dot = "cd ~/.dotfiles";
-    edot = "nvim ~/.dotfiles";  # edit dotfiles
+    edot = "nvim ~/.dotfiles"; # edit dotfiles
     hmsf = "home-manager switch --flake";
   };
 in
@@ -28,8 +28,15 @@ in
           "git"
           "themes"
           "colored-man-pages"
+          "direnv"
         ];
       };
+    };
+    direnv = {
+      enable = true;
+      enableZshIntegration = true;
+      nix-direnv.enable = true;
+      silent = true;
     };
   };
 }
