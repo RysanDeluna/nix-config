@@ -1,12 +1,12 @@
 # https://github.com/nix-community/home-manager/blob/master/modules/programs/neovim.nix
 # The plugins can be directed to their dotfiles within the plugins declarations, observe the definition for pluginWithConfigType
 
-pkgs:
-{
+pkgs: {
   enable = true;
   vimAlias = true;
 
-  extraPackages = with pkgs; [  # Dependencies
+  extraPackages = with pkgs; [
+    # Dependencies
     # TS
     tree-sitter
 
@@ -30,44 +30,51 @@ pkgs:
   plugins = with pkgs.vimPlugins; [
     vim-sensible
 
-    { # Para ver atalhos
+    {
+      # Para ver atalhos
       plugin = which-key-nvim;
       type = "lua";
       config = builtins.readFile ./lua/which-key-config.lua;
     }
 
-    { # File Tree
+    {
+      # File Tree
       plugin = nvim-tree-lua;
       type = "lua";
       config = builtins.readFile ./lua/filetree.lua;
     }
 
-    { # lsp-config 
+    {
+      # lsp-config
       plugin = nvim-lspconfig;
       type = "lua";
       config = builtins.readFile ./lua/lsp.lua;
     }
 
-    { # lps status window 
+    {
+      # lps status window
       plugin = fidget-nvim;
       type = "lua";
-      config = builtins.readFile ./lua/fidget-config.lua; 
+      config = builtins.readFile ./lua/fidget-config.lua;
     }
 
     luasnip
-    { # blink autocompletion
+    {
+      # blink autocompletion
       plugin = blink-cmp;
       type = "lua";
       config = builtins.readFile ./lua/blink-config.lua;
     }
 
-    { # Status bar
+    {
+      # Status bar
       plugin = lualine-nvim;
       type = "lua";
       config = builtins.readFile ./lua/lualine-config.lua;
     }
 
-    { # git info
+    {
+      # git info
       plugin = gitsigns-nvim;
       type = "lua";
       config = builtins.readFile ./lua/gitsigns-config.lua;
@@ -84,7 +91,8 @@ pkgs:
     nvim-web-devicons
     telescope-fzf-native-nvim
     telescope-ui-select-nvim
-    { # Telescope
+    {
+      # Telescope
       plugin = telescope-nvim;
       type = "lua";
       config = builtins.readFile ./lua/telescope-config.lua;
@@ -94,9 +102,10 @@ pkgs:
     indentLine
     nvim-treesitter.withAllGrammars
     vim-nix
+    todo-comments-nvim
 
-
-    { # ---------- COLORSCHEMES ------------
+    {
+      # ---------- COLORSCHEMES ------------
       plugin = nordic-nvim;
       type = "lua";
       config = builtins.readFile ./lua/colorschemes/nordic-config.lua;

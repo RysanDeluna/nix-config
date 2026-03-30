@@ -1,2 +1,3 @@
 - Configurar daemon de notificação
 - Keybind para diminuir o brilho / audio
+- Configurar o dmen
