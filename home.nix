@@ -54,6 +54,8 @@ in
       pkgs.wl-clipboard
       pkgs.gcc
       pkgs.jtbl
+      pkgs.grim
+      pkgs.zbar
     ];
   };
 
@@ -95,7 +97,7 @@ in
       enable = true;
       settings = {
         main = {
-          font = "monospace:size=14";
+          font = "monospace:size=11";
         };
       };
     };
@@ -361,12 +363,12 @@ in
                 " "
                 " "
               ];
-              headphone = "";
-              hands-free = "";
-              headset = "";
-              phone = "";
-              portable = "";
-              car = "";
+              headphone = " ";
+              hands-free = " ";
+              headset = " ";
+              phone = " ";
+              portable = " ";
+              car = " ";
             };
             on-click-right = "pwvucontrol";
           };
