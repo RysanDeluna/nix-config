@@ -56,12 +56,21 @@ in
       pkgs.jtbl
       pkgs.grim
       pkgs.zbar
+
+      # Dev
+      pkgs.jupyter
     ];
   };
 
   xdg.configFile."nvim" = {
     recursive = true;
     source = ./config/nvim;
+  };
+  xdg.desktopEntries.jupyterlab = {
+    name = "JupyterLab";
+    exec = "jupyter lab";
+    terminal = false;
+    type = "Application";
   };
 
   gtk = {
