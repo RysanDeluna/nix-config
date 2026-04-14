@@ -80,8 +80,9 @@
       "$terminal" = "foot";
       "$launch_with_class" = "foot -a";
       "$fileManager" = "nautilus --new-window";
-      "$menu" = "wofi --show drun";
+      "$menu" = "wofi --show";
       "$mod" = "SUPER";
+      "$scripts_dir" = "$HOME/.dotfiles/scripts";
 
       exec-once = [
         "udiskie"
@@ -145,7 +146,8 @@
         "$mod,  W,      Close active, killactive"
         "$mod,  Q,      Exit,         exit"
         "$mod,  RETURN, Terminal,     exec,$terminal"
-        "$mod,  P,      dmenu,        exec,$menu"
+        "$mod,  O,      dmenu,        exec,$menu drun"
+        "$mod,  P,      scripts dmenu,exec,$scripts_dir/999_dmenu_script.sh $scripts_dir/"
         "$mod,  V,      Clipboard history,  exec, $launch_with_class clipse -e 'clipse'"
         "$mod,  F1,     HELP,         exec, $launch_with_class help_window -e 'kbhelper.sh'"
 
