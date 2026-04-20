@@ -59,6 +59,8 @@ in
 
       # Dev
       pkgs.jupyter
+      pkgs.R
+      pkgs.rstudio
     ];
   };
 
