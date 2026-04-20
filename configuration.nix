@@ -85,6 +85,7 @@
     ];
     packages = with pkgs; [
       firefox
+      chromium
       neofetch
       networkmanagerapplet
     ];
