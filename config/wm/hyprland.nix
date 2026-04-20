@@ -91,6 +91,7 @@
         "mako"
         "nm-applet --indicator"
         "clipse -listen"
+        "flameshot"
       ];
 
       monitor = "eDP-1,1920x1080@120,0x0,1.2";
