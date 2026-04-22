@@ -88,6 +88,7 @@
       chromium
       neofetch
       networkmanagerapplet
+      polkit
     ];
   };
 

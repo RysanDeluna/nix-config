@@ -51,6 +51,7 @@ in
       pkgs.lua-language-server
 
       # Utils
+      pkgs.polkit_gnome
       pkgs.wl-clipboard
       pkgs.gcc
       pkgs.jtbl
@@ -96,6 +97,7 @@ in
       enable = true;
     };
     network-manager-applet.enable = true;
+    polkit-gnome.enable = true;
   };
 
   # The home.packages option allows you to install Nix packages into your
