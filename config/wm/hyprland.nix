@@ -24,7 +24,7 @@
       };
 
       decoration = {
-        rounding = 0;
+        rounding = 5;
         active_opacity = 1.0;
         inactive_opacity = 0.98;
         shadow = {
@@ -191,6 +191,10 @@
         "$mod,TAB,Next Workspace,workspace,previous"
       ];
 
+      gesture = [
+        "3, horizontal, workspace"
+      ];
+
       windowrule = [
         # Network manager
         "float, class:nm-connection-editor"
@@ -208,6 +212,9 @@
         # Help Keyboard
         "float, class:help_window"
         "size 70% 70%, class:help_window"
+
+        # On cursor things
+        "float, move cursor -50% -50%, class:.*Nautilus.*"
       ];
     };
   };

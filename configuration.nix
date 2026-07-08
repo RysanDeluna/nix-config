@@ -142,6 +142,18 @@
         variant = "";
       };
     };
+    miniflux = {
+      enable = true;
+      package = pkgs.miniflux;
+      createDatabaseLocally = true;
+      adminCredentialsFile = "/var/lib/secrets/miniflux-admin";
+      config = {
+        CREATE_ADMIN = true;
+        ADMIN_USERNAME = "admin";
+        ADMIN_PASSWORD = "admin123";
+        CLEANUP_ARCHIVE_READ_DAYS = -1;
+      };
+    };
   };
 
   hardware.bluetooth = {
@@ -181,7 +193,7 @@
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   nix.gc = {
     automatic = true;
-    options = "--delete-generations +5";
+    options = "--delete-older-than +30";
   };
   nix.settings.auto-optimise-store = true;
   system.stateVersion = "25.11"; # Did you read the comment?

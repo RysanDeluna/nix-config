@@ -7,7 +7,7 @@ if [ "$IS_RUNNING" = "true" ]; then
 else
     docker compose -f ~/Desktop/lute_docker/docker-compose.yml up -d
 
-    chromium --app=http://localhost:5001 & PID=$!
+    chromium --class=lute --user-data-dir=/tmp/lute-profile --app=http://localhost:5001 & PID=$!
     wait $PID
     docker compose -f ~/Desktop/lute_docker/docker-compose.yml down
 fi
