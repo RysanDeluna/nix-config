@@ -45,6 +45,7 @@ in
       pkgs.nwg-look # theming
       pkgs.nautilus # file manager
       pkgs.pwvucontrol
+      pkgs.gnome-feeds
 
       # LSPs
       pkgs.nixd
@@ -189,6 +190,10 @@ in
               warning = 30;
               critical = 15;
             };
+            events = {
+              on-discharging-warning = "notify-send -u normal 'Low Battery - 30%'";
+              on-discharging-critical = "notify-send -u critical 'Very Low Battery - 15%'";
+            };
             format = "{capacity}% {icon}";
             format-icons = {
               default = [
@@ -197,6 +202,13 @@ in
                 ""
                 ""
                 ""
+              ];
+              charging = [
+                " 󱐋"
+                " 󱐋"
+                " 󱐋"
+                " 󱐋"
+                " 󱐋"
               ];
             };
             max-length = 25;
