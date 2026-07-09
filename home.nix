@@ -44,8 +44,8 @@ in
       pkgs.dconf-editor # GTK editor
       pkgs.nwg-look # theming
       pkgs.nautilus # file manager
+      pkgs.loupe
       pkgs.pwvucontrol
-      pkgs.gnome-feeds
 
       # LSPs
       pkgs.nixd
