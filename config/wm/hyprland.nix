@@ -215,6 +215,8 @@
 
         # On cursor things
         "float, move cursor -50% -50%, class:.*Nautilus.*"
+        "float, move cursor -50% -50%, initialTitle:.*Image Viewer.*"
+        "float, move cursor -50% -10%, initialTitle:.*Open.*"
       ];
     };
   };
