@@ -218,4 +218,98 @@
       ];
     };
   };
+
+  programs.hyprlock = {
+    enable = true;
+    settings = {
+      general = {
+        hide_cursor = true;
+        ignore_empty_input = true;
+      };
+
+      animations = {
+        enabled = true;
+        fade_in = {
+          duration = 300;
+          bezier = "easeOutQuint";
+        };
+        fade_out = {
+          duration = 150;
+          bezier = "easeOutQuint";
+        };
+      };
+
+      background = [
+        {
+          path = "screenshot";
+          blur_passes = 3;
+          blur_size = 8;
+        }
+      ];
+
+      image = [
+        {
+          path = "~/Pictures/icons/kneesocks.png";
+          size = "200";
+          rounding = -1;
+          border_size = 2;
+          border_color = "rgb(5,255,161)";
+          halign = "right";
+          valign = "top";
+          position = "-40,-40";
+        }
+      ];
+
+      label = [
+        {
+          text = "cmd[update:1000] echo \"<span>$(date +\"%I:%M\")</span>\"";
+          color = "rgba(216, 222, 233, 0.9)";
+          font_size = 120;
+          position = "0, 230";
+          halign = "center";
+          valign = "center";
+        }
+      ];
+
+      input-field = [
+        {
+          size = "200, 50";
+          position = "0, -80";
+          monitor = "";
+          dots_center = true;
+          fade_on_empty = false;
+          font_color = "rgb(202, 211, 245)";
+          inner_color = "rgb(91, 96, 120)";
+          outer_color = "rgb(24, 25, 38)";
+          outline_thickness = 5;
+          #shadow_passes = 2;
+        }
+      ];
+
+    };
+  };
+
+  services.hypridle = {
+    enable = true;
+    settings = {
+      general = {
+        after_sleep_cmd = "hyprctl dispatch dpms on";
+        ignore_dbus_inhibit = false;
+        lock_cmd = "pidof hyprlock || hyprlock";
+        before_sleep_cmd = "pidof hyprlock || hyprlock";
+      };
+
+      listener = [
+        {
+          timeout = 900;
+          on-timeout = "pidof hyprlock || hyprlock";
+        }
+        {
+          timeout = 1200;
+          on-timeout = "hyprctl dispatch dpms off";
+          on-resume = "hyprctl dispatch dpms on";
+        }
+      ];
+    };
+  };
 }

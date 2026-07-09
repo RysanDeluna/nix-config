@@ -152,7 +152,12 @@
         ADMIN_USERNAME = "admin";
         ADMIN_PASSWORD = "admin123";
         CLEANUP_ARCHIVE_READ_DAYS = -1;
+        LISTEN_ADDR = "127.0.0.1:7777";
       };
+    };
+    logind.settings.Login = {
+      HandleLidSwitch = "suspend";
+      KillUserProcesses = false;
     };
   };
 
