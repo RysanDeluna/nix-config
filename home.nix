@@ -45,6 +45,7 @@ in
       pkgs.nwg-look # theming
       pkgs.nautilus # file manager
       pkgs.loupe
+      pkgs.imagemagick
       pkgs.pwvucontrol
 
       # LSPs
