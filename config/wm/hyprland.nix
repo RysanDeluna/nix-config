@@ -151,6 +151,7 @@
         "$mod,  P,      scripts dmenu,exec,$scripts_dir/999_dmenu_script.sh $scripts_dir/"
         "$mod,  V,      Clipboard history,  exec, $launch_with_class clipse -e 'clipse'"
         "$mod,  F1,     HELP,         exec, $launch_with_class help_window -e 'kbhelper.sh'"
+        "$mod ALT, l,   Lock,         exec, hyprlock"
 
         "$mod,  T,      Floating,   togglefloating,"
         "$mod,  KP_Add, Fullscreen, fullscreen,1"
@@ -217,6 +218,10 @@
         "float, move cursor -50% -50%, class:.*Nautilus.*"
         "float, move cursor -50% -50%, initialTitle:.*Image Viewer.*"
         "float, move cursor -50% -10%, initialTitle:.*Open.*"
+
+        # Pop-up configs
+        "float, initialTitle:(?i).*(tray|settings).*"
+        "size 70% 70%, initialTitle:(?i).*(tray|settings).*"
       ];
     };
   };
