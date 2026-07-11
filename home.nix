@@ -64,6 +64,9 @@ in
       pkgs.jupyter
       pkgs.R
       pkgs.rstudio
+
+      # Other
+      pkgs.obsidian
     ];
   };
 
@@ -437,6 +440,5 @@ in
     };
 
     discord.enable = true;
-    obsidian.enable = true;
   };
 }
