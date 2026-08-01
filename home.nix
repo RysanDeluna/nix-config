@@ -440,5 +440,10 @@ in
     };
 
     discord.enable = true;
+
+    zathura = {
+      enable = true;
+      extraConfig = "include ../../.dotfiles/dots/zathura-nord";
+    };
   };
 }
